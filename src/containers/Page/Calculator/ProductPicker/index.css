@@ -1,0 +1,169 @@
+:root {
+  --gap : 1rem;
+}
+
+/* Container com menu lateral e área de exibição */
+.product-picker {
+  background-color: #fff;
+
+  min-height: 600px;
+
+  margin-top: var(--gap);
+  padding-bottom: 80px;
+}
+
+/* Container base o qual os produtos terão o posicionamento atrelado */
+.category-list {
+  position: relative;
+}
+
+/* Menu com produtos */
+.product-category {
+  margin-top: 0;
+}
+
+.product-category:not(:first-child) {
+  margin-top: 1px;
+}
+
+/* Produtos de uma dada categoria, aqui o posicionamento é relativo a category-list o qual ele está inserido */
+.products {
+  position: absolute;
+  left: 20%;
+  width: 80%;
+  top: 0;
+  display: none;
+}
+
+/* Mostrar apenas os produtos sem as categorias */
+.only-products {
+  left: 0;
+  width: 100%;
+  top: 0;
+}
+
+.only-products.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: var(--gap);
+}
+
+.only-products.empty-message {
+  padding: var(--gap);
+  font-size: 24px;
+  font-weight: 300;
+
+  text-align: center;
+}
+
+/* Quando visível os filhos estarão em grid de 3 item por linha*/
+.products.selected {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: var(--gap);
+}
+
+/* botão que exibe/esconde os itens fdo menu, as dimensões são relativas a category-list o qual está inserido */
+.product-category-menu {
+  width: 18%;
+
+  background-color: #505055;
+  
+  border: none;
+  padding: 0.5rem 1rem;
+  
+  font-size: 14px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-stretch: 100%;
+  font-weight: 400;
+  color: white;
+  text-decoration: none;
+
+  outline: 0;
+}
+
+.product-category-menu.active {
+  background-color: #0078d4;
+}
+
+.product-selector {
+  height: 100px;
+  width: 100%;
+}
+
+@media(max-width: 1300px) {
+  .main-section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .product-picker {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: var(--gap);
+    width: 100%;
+  }
+}
+
+@media(max-width: 950px) {
+  /* Container com menu lateral e área de exibição */
+
+  .main-section {
+    width: 100%;
+    display: grid;
+    grid-template-columns : 1fr;
+    grid-gap: var(--gap);
+  }
+
+  .product-picker {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: var(--gap);
+    width: 100%;
+  }
+
+  .category-list {
+    position: initial;
+    width: 100%;
+  }
+
+  .product-category {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .products {
+    position: initial;
+    width: 100%;
+    margin: var(--gap) 0;
+    display: none;
+  }
+
+  .products.selected {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .only-products.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-category-menu {
+    width: 100%;
+  }
+}
+
+@media(max-width: 540px) {
+  .products.selected {
+    grid-template-columns: 1fr;
+  }
+
+  .only-products.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

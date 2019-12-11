@@ -1,0 +1,87 @@
+:root {
+    --gap: 1rem;
+    --box-shadow: 1px 1px 3px rgba(0,0,0,.1), 1px 1px 2px rgba(0,0,0,.1);
+}
+
+/** Cabeçalho da estimativa */
+.estimative-header {
+    padding: 2px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.estimative-header-title {
+    flex-grow: 7;
+}
+
+.estimative-header-title-input {
+    color: rgb(76, 76, 81);
+    font-size: 20px;
+    font-weight: 400;
+    border: solid 1px transparent;
+    border-radius: 0;
+}
+
+.estimative-header-title-input::placeholder {
+    color: rgb(76, 76, 81);
+}
+
+.estimative-header-title-input:focus {
+    border: solid 1px rgb(150, 150, 150);
+
+    box-shadow: 0;
+}
+
+.estimative-header-total {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.estimative-header-total-text > span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2e2e33;
+
+    text-rendering: optimizeLegibility;
+}
+
+@media(max-width: 950px) {
+    .estimative-header {
+        padding: 2px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .estimative-header-title, .estimative-header-total {
+        flex-grow: 1;
+    }
+
+    .estimative-header-total {
+        align-items: flex-start;
+    }
+}
+
+/** Botões de ação do cabeçalho */
+.estimative-global-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.estimative-global-actions-buttons {
+    flex-grow: 0.05;
+    display: flex;
+    justify-content: space-around;
+}
+
+.estimative-global-actions-buttons > button {
+    border-radius: 50%;
+}
+
+@media(max-width: 540px) {
+    .estimative-global-actions {
+        display: none;
+    }
+}
