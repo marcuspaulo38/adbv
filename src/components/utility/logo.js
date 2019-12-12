@@ -19,7 +19,7 @@ export default props => {
             to="/overview"
             onClick={() => props.onClick({ key: 'overview' })}
           >
-            CloudWeDo
+            OPÇÕES
           </Link>
         </h3>
       )}

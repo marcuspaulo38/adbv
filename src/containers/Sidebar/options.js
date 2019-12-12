@@ -1,12 +1,12 @@
 const options = [
+  // {
+  //   key: 'Calculator',
+  //   label: 'Calculadora',
+  //   leftIcon: 'ion-calculator',
+  // },
   {
-    key: 'Calculator',
-    label: 'Calculadora',
-    leftIcon: 'ion-calculator',
-  },
-  {
-    key: 'FormEscala',
-    label: 'Escala Avulsa',
+    key: 'CadastroEA',
+    label: 'Cadastro EA',
     leftIcon: 'ion-escalar',
   }
 ];

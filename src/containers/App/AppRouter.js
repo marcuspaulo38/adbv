@@ -8,8 +8,8 @@ const routes = [
     component: asyncComponent(() => import('../Page/Calculator/index')),
   },
   {
-    path: 'FormEscala',
-    component:asyncComponent(() =>import('../Page/EscalaAvulsa/index')),
+    path: 'CadastroEA',
+    component:asyncComponent(() =>import('../Page/CadastroEA/index')),
   }
 ];
 

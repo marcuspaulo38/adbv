@@ -23,7 +23,7 @@ const TabDescription = styled.div`
 
 const InputSearch = styled.div`
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 5rem;
 
     > .ant-input {
         border: solid 1px rgb(150, 150, 150);
@@ -80,8 +80,6 @@ export default function SearchBar(props) {
                     
                    </tr>
                  </table>
-
-               
                   <br /><br /> <br /><br />
                 
                 </p>
@@ -90,14 +88,11 @@ export default function SearchBar(props) {
             <InputSearch>
                 <Input
                     onChange={props.onQueryChange}
-                    placeholder="Search Products" style={{ borderRadius: 0 }}/>
-            </InputSearch>
-            
-            <Input onChange={props.onQueryChange}
                     placeholder="Localizar" style={{ borderRadius: 0 }}/>
             </InputSearch>
             
-            
+            <br /><br />
+                    
             
 
         </>
