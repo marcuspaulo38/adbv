@@ -12,6 +12,7 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
     <link
       rel="icon"
       type="image/png"
@@ -35,6 +36,47 @@
       crossorigin=""
       async
     />
+    
+    <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="13ce572d586f6e3b4267b954-|49" defer=""></script>
+    <script type="text/javascript" src="https://unpkg.com/react-listbox@1.2.5/dist/react-listbox.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/react-listbox@1.2.5/dist/react-listbox.css">
+<script>
+
+function listbox_moveacross(sourceID, destID) {
+	var src = document.getElementById(sourceID);
+	 var dest = document.getElementById(destID);
+           for(var count=0; count < src.options.length; count++) {
+            if(src.options[count].selected == true) {
+		var option = src.options[count];
+
+						var newOption = document.createElement("option");
+						newOption.value = option.value;
+						newOption.text = option.text;
+						newOption.selected = true;
+						try {
+								 dest.add(newOption, null); //Standard
+								 src.remove(count, null);
+						 }catch(error) {
+								 dest.add(newOption); // IE only
+								 src.remove(count);
+						 }
+						count--;
+
+				}
+
+			}
+
+		}
+		function listbox_selectall(listID, isSelect) {
+
+			var listbox = document.getElementById(listID);
+			for(var count=0; count < listbox.options.length; count++) {
+
+				listbox.options[count].selected = isSelect;
+
+			}
+		}
+</script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.

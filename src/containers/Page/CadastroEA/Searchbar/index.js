@@ -21,6 +21,8 @@ const TabDescription = styled.div`
     font-weight: 300;
 `;
 
+
+
 const InputSearch = styled.div`
     width: 100%;
     margin-top: 5rem;

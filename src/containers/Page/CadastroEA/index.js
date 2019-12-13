@@ -1,13 +1,18 @@
 import React from 'react';
 
 import { connect } from 'react-redux'
+import 'antd/dist/antd.css';
 
 import {
   Row,
-  Col
+  Col,
+  Select,
+  Input, InputNumber, DatePicker, AutoComplete, Cascader
 } from 'antd';
 
+
 import styled from 'styled-components';
+
 
 import {
   ColumnStyle,
@@ -23,10 +28,13 @@ import Estimatives from './Estimatives/index';
 
 import actions from '../../../redux/calculator/actions';
 
+const { Option } = Select;
+
 const {
   loadProducts,
   searchProducts,
   requestAddItemToEstimative
+  
 } = actions
 
 const EstimativesStyle = styled.div`
@@ -37,24 +45,30 @@ class CalculatorComponent extends React.Component {
 
   constructor(props) {
      super(props);
+     this.handleClick = this.handleClick.bind(this);
      this.handleSubmit = this.handleSubmit.bind(this);
      this.handleTextChange = this.handleTextChange.bind(this);
      this.handleColorSelect = this.handleColorSelect.bind(this);
      this.handleAnimalSelect = this.handleAnimalSelect.bind(this);
-     this.state = {name: '', favoriteColor: 'blue', favoriteAnimal: ''}
+     this.state = {name: '', colaborador: '', data: '', data1:'', favoriteColor: 'blue', favoriteAnimal: ''}
      
     
   }
+  
+  handleClick() {
+    alert('Clicado')
+  }
   handleSubmit(event) {
     alert(
-      `Dados: name is ${this.state.name}, your favorite color is ${this.state.favoriteColor}` +
-      `and your favorite animal is ${this.state.favoriteAnimal}`
+      `Dados: Nome é ${this.state.name}, colaborador ${this.state.colaborador}` +
+      `data ${this.state.data} 'data1 é ${this.state.data1}`
     );
     event.preventDefault();
   }
  
   handleTextChange(event) {
     this.setState({name: event.target.value});
+    
   }
  
   handleColorSelect(event) {
@@ -64,7 +78,8 @@ class CalculatorComponent extends React.Component {
   handleAnimalSelect(event) {
     this.setState({favoriteAnimal: event.target.value});
   }
-
+ 
+ 
 
   render() {
     return (
@@ -82,93 +97,117 @@ class CalculatorComponent extends React.Component {
                   <TabContentStyle>
                     <SearchBar onQueryChange={this.onSearchProduct}/>
                     <br />
-                    <div> 
-                       <form onSubmit={this.handleSubmit}>
-        <div>
-        
-          
-          <label>
-            Colaborador:
-            <input type="text" placeholder="Entre com o nome do Colaborador"  onChange={ this.handleTextChange } value={ this.state.currentText }/>
-          </label>
-          <br />
-          <label>
-            Data de Inicio de Apontamento *
-            <input type="date" name= "apontamento" value={this.state.apontamento} onChange={ this.handleTextChange } value={ this.state.currentText }/>
-          </label> <br />
-          <label>
-          Data de Termo de Apontamento:
-          <input type="date" name="apontamento1" value={this.state.apontamento1} onChange={ this.handleTextChange } value={ this.state.currentText }/>
-          </label> <br />
-          <label>
-          OBS
-          <input type="text" name="obs"  value={this.state.obs} onChange={ this.handleTextChange } value={ this.state.currentText }/>
-          </label> <br />
-          <label>
-          Gestor *
-          <input type="text" name="gestor" value={this.state.gestor} onChange={ this.handleTextChange } value={ this.state.currentText }/>
-          <br />Usuario qye receberá notificações caso o apontamento esteja incompleto
-          </label> <br />
-          <label>
-           Apontamento controlado por escala? *
-          <select value={this.state.ApontamentoControladoEscala} onChange={this.handleColorSelect1}>
-            <option value="s">Sim</option>
-            <option value="n">Não</option>
-           <br /> Somente marcar não para áreas que não prestam serviços para Projeto,Contrato.
-          </select>
-          
-          </label> <br />
-          <label>
-          Cargo prestação de serviço 
-          <select value={this.state.CargoPrestacaoServiço } onChange={this.handleColorSelect2}>
-            <option value="s">Sim</option>
-            <option value="n">Não</option>
-          </select>
-          <br />Preencher somente se colaborador presta serviços para Cliente - Essa infromação
-          aparece abaixo
-          </label> <br />
-          <label>
-          Pre Filtro
-          <input type="text" name="obs"  value={this.state.obs} onChange={ this.handleTextChange } value={ this.state.currentText }/>
-          </label> <br />
-          <label>
-          Tipo de Restrição 
-          <select value={this.state.favoriteColor2} onChange={this.handleColorSelect2}>
-            <option value="">Nenhuma</option>
-            <option value="c">Contrato</option>
-          </select>
-          <br />Caso seja marcada a opção Contrato, o período de fechamento dos relatórios será de 01 a 30
-          </label> <br />
-          
-          <label>
-          Cadastro de Plantão
-          <select value={this.state.favoriteColor2} onChange={this.handleColorSelect2}>
-            <option value="">Nenhuma</option>
-            <option value="c">Contrato</option>
-          </select>
-         <br /> Caso seja marcada a opção Contrato, o período de fechamento dos relatórios será de 01 a 30
-          </label> <br />
-          
-          <label> É colaborador
-           <select value={this.state.favoriteColor2} onChange={this.handleColorSelect2}>
-            <option value="s">Sim</option>
-            <option value="n">Não</option>
-          </select>
-        
-          </label> <br />
-          <label>
-          CPF
-          <input type="text" name="obs"  value={this.state.cpf} onChange={ this.handleTextChange } value={ this.state.currentText }/>
-          </label> <br />
          
-        </div>
+        <form onSubmit={this.handleSubmit}>
         <div>
-          <input type="submit" value="Salvar" />&nbsp;&nbsp;
-          <input type="reset" value="Cancelar" />
-        </div>
-      </form>
-     </div>
-
+        
+              <div style={{ marginBottom: 16 }}>
+                 <Input addonBefore="Colaborador" addonAfter="IMG | IMG" defaultValue="Informe o colaborador" name="colaborador" onChange={ this.handleTextChange } value={ this.state.colaborador }/>
+              </div>
+             
+              <div style={{ marginBottom: 16 }}>
+                 Data de Inicio de Apontamento * <Input type="date" />
+              </div>
+              
+              <div style={{ marginBottom: 16 }}>
+                  Data de Termo de Apontamento *<Input type="date" />
+              </div>
+               
+              <div style={{ marginBottom: 16 }}>
+                 OBS *<Input type="text" />
+              </div>
+               
+              <div style={{ marginBottom: 16 }}>
+                 Gestor  *<Input type="text" />
+              </div>
+              
+              <div style={{ marginBottom: 16 }}> 
+                 Apontamento controlado por escala?
+                 <select defaultValue="Não" style={{ width: 90 }}>
+                   <option value="Não">Não</option>
+                   <option value="Sim">Sim</option>
+                 </select>
+               </div>
+               
+               <div style={{ marginBottom: 16 }}>
+                 Cargo prestação de serviço  *<Input type="text" />
+                 Preencher somente se colaborador presta serviços para Cliente - Essa infromação
+               </div>
+               
+               <div style={{ marginBottom: 16 }}>
+                 Possuei Restrição?
+                 <select defaultValue="Não" style={{ width: 90 }}>
+                   <option value="Não">Não</option>
+                   <option value="Sim">Sim</option>
+                 </select>
+               </div>
+               
+               <div style={{ marginBottom: 16 }}>
+                   Pré-Filtro  *<Input type="text" />
+               </div>
+               
+               
+               <div style={{ marginBottom: 16 }}>
+                 Tipo de Restrição
+                 <select defaultValue="Nenhuma:" style={{ width: 90 }}>
+                   <option value="Nenhuma">Nenhuma</option>
+                   <option value="Sim">Sim</option>
+                  </select>
+               </div>
+                
+               <div style={{ marginBottom: 16 }}> 
+                 Cadastro de Plantão
+                   <select value={this.state.favoriteColor2} onChange={this.handleColorSelect2}>
+                      <option value="">Nenhuma</option>
+                      <option value="c">Contrato</option>
+                    </select>
+               </div>
+               <div style={{ marginBottom: 16 }}>
+                <table>
+                 <tr>
+                  <td>
+                    <select id="s" size="10" multiple>
+	                    <option value="a">Marcus</option>
+	                    <option value="b">Samuel</option>
+	                    <option value="c">Carlos</option>
+	                    <option value="i">France</option>
+                    </select>
+                  </td>
+                  <td valign="center">
+                    <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('s', 'd')" data-cf-modified-13ce572d586f6e3b4267b954-="">&gt;&gt;</a>
+                    <br/>
+                    <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('d', 's')" data-cf-modified-13ce572d586f6e3b4267b954-="">&lt;&lt;</a>
+                  </td>
+                  <td>
+                   <select id="d" size="10" multiple>
+	                   <option value="a">Outros</option>
+                   </select>
+                    <br /> Caso seja marcada a opção Contrato, o período de fechamento dos relatórios será de 01 a 30
+                  </td>
+               </tr>
+              </table>
+              </div>
+             
+             <div style={{ marginBottom: 16 }}> 
+              É colaborador
+               <select value={this.state.favoriteColor2} onChange={this.handleColorSelect2}>
+                <option value="s">Sim</option>
+                <option value="n">Não</option>
+              </select>
+             </div> 
+        
+              <div style={{ marginBottom: 16 }}>
+               CPF
+                <Input type="text" />
+              </div>
+          
+            <div>
+             <input type="submit" value="Salvar" />&nbsp;&nbsp;
+             <input type="reset" value="Cancelar" />
+             
+            </div>
+    </div>
+    </form>
                   </TabContentStyle>
                 </TabPane>
 
