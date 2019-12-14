@@ -9,7 +9,7 @@ import {
 const InputWrapper = ComponentName => styled(ComponentName)`
   &.ant-input {
     padding: 4px 10px;
-    width: 100%;
+    width: 50%;
     height: 35px;
     cursor: text;
     text-align: ${props => (props['data-rtl'] === 'rtl' ? 'right' : 'left')};
@@ -239,7 +239,7 @@ const InputSearchWrapper = ComponentName => styled(ComponentName)`
   &.ant-input-affix-wrapper {
     .ant-input {
       padding: 4px 10px;
-      width: 100%;
+      width: 10%;
       height: 35px;
       cursor: text;
       font-size: 13px;

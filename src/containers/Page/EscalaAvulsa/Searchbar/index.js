@@ -22,7 +22,7 @@ const TabDescription = styled.div`
 `;
 
 const InputSearch = styled.div`
-    width: 100%;
+    width: 50%;
     margin-top: 3rem;
 
     > .ant-input {

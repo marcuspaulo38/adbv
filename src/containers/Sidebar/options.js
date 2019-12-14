@@ -6,7 +6,7 @@ const options = [
   // },
   {
     key: 'CadastroEA',
-    label: 'Cadastro EA',
+    label: 'Cadastro',
     leftIcon: 'ion-escalar',
   }
 ];

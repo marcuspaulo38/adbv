@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import {
   Row,
@@ -84,7 +84,7 @@ class CalculatorComponent extends React.Component {
       <>
         <Row type="flex" justify="space-around">
           <Col xs={24} sm={24} md={24} lg={20}>
-                <p style={{margin: 0}}>Escala Avulsa-FORTALEZA\F9612101 </p>
+                <p style={{margin: 0}}></p>
           
 
             <ColumnStyle>

@@ -25,7 +25,7 @@ const TabDescription = styled.div`
 
 const InputSearch = styled.div`
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 10rem;
 
     > .ant-input {
         border: solid 1px rgb(150, 150, 150);
@@ -47,10 +47,9 @@ export default function SearchBar(props) {
         <>
             <TabDescription>
                 <p style={{margin: 0}}>
-                <br /><br /> <br /><br /><br />
+                <br /><br /> <br /><br /><br /><br />
                  <table border="0">
                     <tr>
-                       
                       <td><center> <a href={'/store/${item._id}'} > <img src="./images/salvar.png"  width="30" height="30"/><br />Salvar</a></center></td>
                       <td><center><a href={'/clear/${item._id}'} > <img src="./images/cancelar.png"  width="30" height="30"/><br />Cancelar</a></center></td>
                       <td><center><a href={'/clone/${item._id}'} ><img src="./images/colar.png"  width="30" height="30"/><br />Colar</a></center></td>
@@ -63,7 +62,7 @@ export default function SearchBar(props) {
                        </td>  
 
                        <td><center><a href={'/delete/${item._id}'} ><img src="./images/excluir.png"  width="30" height="30"/>Excluir</a></center></td>
-                       <td><center><a href={'/nexo/${item._id}'} ><img src="./images/anexar.png"  width="30" height="30"/>Anexar</a></center></td>
+                       <td><center><a href={'/anexo/${item._id}'} ><img src="./images/anexar.png"  width="30" height="30"/>Anexar</a></center></td>
                        <td></td> 
                        <td></td>   
                       <td><center><a href={'/store/${item._id}'} ><img src="./images/abc.png"  width="30" height="30"/>Verificar Ortografia</a></center></td>
@@ -87,13 +86,8 @@ export default function SearchBar(props) {
                 </p>
                 <br /><br />
             </TabDescription>bDescription>
-            <InputSearch>
-                <Input
-                    onChange={props.onQueryChange}
-                    placeholder="Localizar" style={{ borderRadius: 0 }}/>
-            </InputSearch>
             
-            <br /><br />
+            <br /><br /><br /><br />
                     
             
 

@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 
 import {
   Row,
   Col,
   Select,
-  Input, InputNumber, DatePicker, AutoComplete, Cascader
+  Input, InputNumber, DatePicker, AutoComplete, Cascader,
+  Tooltip, Icon 
 } from 'antd';
 
 
@@ -24,9 +25,11 @@ import {
 import SearchBar from './Searchbar/index';
 import ProductPicker from './ProductPicker';
 import openNotification from '../Calculator/Notification/index';
-import Estimatives from './Estimatives/index';
+
 
 import actions from '../../../redux/calculator/actions';
+
+
 
 const { Option } = Select;
 
@@ -35,49 +38,55 @@ const {
   searchProducts,
   requestAddItemToEstimative
   
-} = actions
+} = actions;
 
-const EstimativesStyle = styled.div`
-  margin-top: 1rem;
-`;
+const theme = {
+  spacing: 2,
+};
+
+
+
 
 class CalculatorComponent extends React.Component {
 
   constructor(props) {
      super(props);
-     this.handleClick = this.handleClick.bind(this);
-     this.handleSubmit = this.handleSubmit.bind(this);
-     this.handleTextChange = this.handleTextChange.bind(this);
-     this.handleColorSelect = this.handleColorSelect.bind(this);
-     this.handleAnimalSelect = this.handleAnimalSelect.bind(this);
-     this.state = {name: '', colaborador: '', data: '', data1:'', favoriteColor: 'blue', favoriteAnimal: ''}
+
+     this.handleColaboradorChange = this.handleColaboradorChange.bind(this);
+     this.handleInicioaChange = this.handleInicioaChange.bind(this);
+     this.handleTermoaChange = this.handleTermoaChange.bind(this);
+     this.handleObsChange = this.handleObsChange.bind(this);
      
-    
+     this.handleSubmit = this.handleSubmit.bind(this);
+     this.state = {
+                   colaborador: '',
+                   inicioa:'',
+                   termoa:'',
+                   obs:''
+                  };
+  
   }
   
-  handleClick() {
-    alert('Clicado')
-  }
   handleSubmit(event) {
-    alert(
-      `Dados: Nome é ${this.state.name}, colaborador ${this.state.colaborador}` +
-      `data ${this.state.data} 'data1 é ${this.state.data1}`
-    );
+    alert('Colaborador: ' + this.state.colaborador+'Inicio Apontamento'+this.state.inicioa+'Termo Apontamento'+this.state.termoa+'Obs'+this.state.obs);
     event.preventDefault();
   }
  
-  handleTextChange(event) {
-    this.setState({name: event.target.value});
-    
-  }
+  
+  handleColaboradorChange( event ){ 
+   this.setState ({colaborador: event.target.value}); 
+ } 
+ handleInicioaChange (event ){ 
+ this.setState ({inicioa: event.target.value}); 
+ }
+  handleTermoaChange (event ){ 
+ this.setState ({termoa: event.target.value}); 
+ }
+  handleObsChange (event ){ 
+ this.setState ({obs: event.target.value}); 
+ }
  
-  handleColorSelect(event) {
-    this.setState({favoriteColor: event.target.value});
-  }
  
-  handleAnimalSelect(event) {
-    this.setState({favoriteAnimal: event.target.value});
-  }
  
  
 
@@ -86,138 +95,190 @@ class CalculatorComponent extends React.Component {
       <>
         <Row type="flex" justify="space-around">
           <Col xs={24} sm={24} md={24} lg={20}>
-                <p style={{margin: 0}}>Escala Avulsa-FORTALEZA\F9612101 </p>
-                
-          
+             <p style={{margin: 0}}></p>
             <ColumnStyle>
               <Tabs animated={false} type="card">
                 <TabPane tab="Editar" key="1">
-                <br />
-                
                   <TabContentStyle>
                     <SearchBar onQueryChange={this.onSearchProduct}/>
                     <br />
-         
-        <form onSubmit={this.handleSubmit}>
-        <div>
-        
-              <div style={{ marginBottom: 16 }}>
-                 <Input addonBefore="Colaborador" addonAfter="IMG | IMG" defaultValue="Informe o colaborador" name="colaborador" onChange={ this.handleTextChange } value={ this.state.colaborador }/>
-              </div>
-             
-              <div style={{ marginBottom: 16 }}>
-                 Data de Inicio de Apontamento * <Input type="date" />
-              </div>
-              
-              <div style={{ marginBottom: 16 }}>
-                  Data de Termo de Apontamento *<Input type="date" />
-              </div>
-               
-              <div style={{ marginBottom: 16 }}>
-                 OBS *<Input type="text" />
-              </div>
-               
-              <div style={{ marginBottom: 16 }}>
-                 Gestor  *<Input type="text" />
-              </div>
-              
-              <div style={{ marginBottom: 16 }}> 
-                 Apontamento controlado por escala?
-                 <select defaultValue="Não" style={{ width: 90 }}>
-                   <option value="Não">Não</option>
-                   <option value="Sim">Sim</option>
-                 </select>
-               </div>
-               
-               <div style={{ marginBottom: 16 }}>
-                 Cargo prestação de serviço  *<Input type="text" />
-                 Preencher somente se colaborador presta serviços para Cliente - Essa infromação
-               </div>
-               
-               <div style={{ marginBottom: 16 }}>
-                 Possuei Restrição?
-                 <select defaultValue="Não" style={{ width: 90 }}>
-                   <option value="Não">Não</option>
-                   <option value="Sim">Sim</option>
-                 </select>
-               </div>
-               
-               <div style={{ marginBottom: 16 }}>
-                   Pré-Filtro  *<Input type="text" />
-               </div>
-               
-               
-               <div style={{ marginBottom: 16 }}>
-                 Tipo de Restrição
-                 <select defaultValue="Nenhuma:" style={{ width: 90 }}>
-                   <option value="Nenhuma">Nenhuma</option>
-                   <option value="Sim">Sim</option>
-                  </select>
-               </div>
-                
-               <div style={{ marginBottom: 16 }}> 
-                 Cadastro de Plantão
-                   <select value={this.state.favoriteColor2} onChange={this.handleColorSelect2}>
-                      <option value="">Nenhuma</option>
-                      <option value="c">Contrato</option>
-                    </select>
-               </div>
-               <div style={{ marginBottom: 16 }}>
-                <table>
-                 <tr>
-                  <td>
-                    <select id="s" size="10" multiple>
-	                    <option value="a">Marcus</option>
-	                    <option value="b">Samuel</option>
-	                    <option value="c">Carlos</option>
-	                    <option value="i">France</option>
-                    </select>
-                  </td>
-                  <td valign="center">
-                    <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('s', 'd')" data-cf-modified-13ce572d586f6e3b4267b954-="">&gt;&gt;</a>
-                    <br/>
-                    <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('d', 's')" data-cf-modified-13ce572d586f6e3b4267b954-="">&lt;&lt;</a>
-                  </td>
-                  <td>
-                   <select id="d" size="10" multiple>
-	                   <option value="a">Outros</option>
-                   </select>
-                    <br /> Caso seja marcada a opção Contrato, o período de fechamento dos relatórios será de 01 a 30
-                  </td>
-               </tr>
-              </table>
-              </div>
-             
-             <div style={{ marginBottom: 16 }}> 
-              É colaborador
-               <select value={this.state.favoriteColor2} onChange={this.handleColorSelect2}>
-                <option value="s">Sim</option>
-                <option value="n">Não</option>
-              </select>
-             </div> 
-        
-              <div style={{ marginBottom: 16 }}>
-               CPF
-                <Input type="text" />
-              </div>
-          
-            <div>
-             <input type="submit" value="Salvar" />&nbsp;&nbsp;
-             <input type="reset" value="Cancelar" />
-             
-            </div>
-    </div>
-    </form>
-                  </TabContentStyle>
-                </TabPane>
-
-                
+                      <form onSubmit={this.handleSubmit}>
+                       <div>
+                         <div>
+                               <table>
+                                <tr>
+                                 <td>
+                                   <div style={{ marginBottom: 16 , width:500}}>
+                                   Colaborador *<Input type="text" name="colaborador" id="nome" value = {this.state.colaborador} onChange = {this.handleColaboradorChange}/>
+                                   
+                                   </div>
+                                 </td>
+                                 <td>
+                                   <img src='./images/usuario.png'  width='22' height='22'/> 
+                                 </td>
+                                 </tr>
+                                </table>
+                              </div>
+                            
+                          
+                             <div>
+                               <table>
+                                <tr>
+                                 <td>
+                                   <div style={{ marginBottom: 16 , width:250}}>
+                                     <img src='./images/calendario.png'  width='22' height='22'/>
+                                      &nbsp;Inicio de Apontamento *<Input type="date" name="inicioa" id="inicioa" value = {this.state.inicioa} onChange = {this.handleInicioaChange}/>
+                   
+                                    </div>
+                                  </td>
+                                  <td>
+                                  <div style={{ marginBottom: 16 , width:250}}>
+                                  <img src='./images/calendario.png'  width='22' height='22'/>
+                                  &nbsp;Termo de Apontamento *<Input type="date" name="termoa" id="termoa" value = {this.state.termoa} onChange = {this.handleTermoaChange}/>
+                                  </div>
+                                 </td>
+                                  </tr>
+                                </table>
+                              </div>
+                              <div style={{ marginBottom: 16 , width:500}}>
+                             
+                                OBS <br /><Input type="text" name="obs" id="obs" value = {this.state.obs} onChange = {this.handleObsChange}/>
+                                 
+                              </div>
+                              <div>
+                                <table>
+                                       <tr>
+                                        <td>
+                                          <div style={{ marginBottom: 16 , width:400}}><br />
+                                            Gestor  *<Input type="text" />
+                                            Usuário que receberá notificações caso o apontamento seja incompleto
+                                           </div>
+                                        </td>
+                                        <td>
+                                           <div style={{ marginBottom: 16 , width:700}}><br />
+                                             Apontamento controlado por escala? <br /> 
+                                             <select defaultValue="Não" style={{ width: 225, height:30}}>
+                                              <option value="Não">Não</option>
+                                              <option value="Sim">Sim</option>
+                                             </select><br />
+                                             Marcar Não apenas para áreas que não prestam serviços <br />para Projeto/Contrato
+                                           </div>
+                                        </td>
+                                       </tr>
+                                </table>
+                              </div>
+                              
+                              <div>
+                              <table>
+                                       <tr>
+                                        <td>
+                                           <div style={{ marginBottom: 16, width:400 }}><br />
+                                            Cargo prestação de serviço  *<Input type="text" />
+                                            Preencher somente se colaborador <br />presta serviços para Cliente - Essa informação
+                                           </div>
+                                        </td>
+                                        <td>
+                                           <div style={{ marginBottom: 16 , width:500}}><br />
+                                             Possuei Restrição? <br />
+                                              <select defaultValue="Não" style={{ width: 225, height:30}}>
+                                                <option value="Não">Não</option>
+                                                <option value="Sim">Sim</option>
+                                              </select><br /> 
+                                               O usuário não poderá escolher a Classificação e o filtro <br /> no Formulário - deve-se preencher abaixo
+                                           </div>
+                                        </td>
+                                        
+                                       </tr>
+                                </table>
+                              </div>
+                              
+                               <div>
+                                <table>
+                                       <tr>
+                                        <td>
+                                          <div style={{ marginBottom: 16 , width:400}}>
+                                            Pré-Filtro  *<Input type="text" />
+                                           </div>
+                                        </td>
+                                        <td>
+                                           <div style={{ marginBottom: 16 , width:500}}><br /><br />
+                                             Tipo de Restrição <br />
+                                              <select defaultValue="Nenhuma:" style={{ width: 225, height:30}}>
+                                               <option value="Nenhuma">Nenhuma</option>
+                                               <option value="Sim">Sim</option>
+                                              </select><br />
+                                              Caso seja marcada a opção Contrato, o período de fechamento dos relatórios será de 01 a 30
+                                           </div>
+                                        </td>
+                                       </tr>
+                                </table>
+                              </div>
+                              <td>Cadastro de plantão</td>
+                              <div style={{ marginBottom: 16}} >
+                                 <table>
+                                  <tr>
+                                  
+                                   <td>
+                                     <select id="s" multiple style={{ width: 225, height:100}}>
+                                        
+                                       <option value="a">Poo de Recursos-For</option>
+                                       <option value="b">Poo de Recursos-Rec</option>
+                                       <option value="c">Poo de Recursos-Salv</option>
+                                     </select>
+                                    
+                                   </td>
+                                   <td valign="center">
+                                     &nbsp;&nbsp;<a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('s', 'd')" data-cf-modified-13ce572d586f6e3b4267b954-=""><img src='./images/avancar.png'  width='22' height='22'/></a>
+                                     &nbsp;&nbsp;<a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('d', 's')" data-cf-modified-13ce572d586f6e3b4267b954-=""><img src='./images/retornar.png'  width='22' height='22'/></a>&nbsp;
+                                   </td>
+                                   <td>
+                                    <select id="d" size="10" multiple style={{ width: 225, height:100}} >
+                                      <option value="a">Outros</option>
+                                    </select>
+                                   </td>
+                                </tr>
+                               </table>
+                               <div>
+                                 O usuário não poderá escolher a Classificação e o filtro no Formulário - deve-se preencher abaixo
+                               </div>
+                             </div>
+                             
+                              <div>
+                                <table>
+                                       <tr>
+                                        <td>
+                                          <div style={{ marginBottom: 16}}>
+                                           É colaborador <br />
+                                            <select  value={this.state.favoriteColor2} onChange={this.handleColorSelect2} style={{ width: 211, height:30}}>
+                                             <option value="s">Sim</option>
+                                             <option value="n">Não</option>
+                                           </select>
+                                           </div>
+                                        </td>
+                                        <td>
+                                           <div style={{ marginBottom: 16 , width:200}}>
+                                             CPF
+                                             <Input type="text" />
+                                           </div>
+                                        </td>
+                                       </tr>
+                                </table>
+                              </div>
+                             
+                            
+                           <div>
+                             <input type="submit" value="Salvar" />&nbsp;&nbsp;
+                             <input type="reset" value="Cancelar" />
+                           </div>
+                    </div>
+                  </form>
+                 </TabContentStyle>
+               </TabPane> 
               </Tabs>
             </ColumnStyle>
           </Col>
         </Row>
-
-        
+    
       </>
     );
   }
@@ -236,39 +297,5 @@ const Calculator = connect(
       requestAddItemToEstimative
   }
 )(CalculatorComponent)
-
-/*
-function mover(fonte, destino) {
-  var selecionados = fonte.querySelectorAll("option:checked");
-  for ( var i = 0 ; i < selecionados.length ; i++ ) {
-      fonte.removeChild(selecionados[i]);
-      destino.appendChild(selecionados[i]);
-  }
-}
-
-document.querySelector("button.dir").onclick = function() {
-    mover(document.querySelector("select.esq"),
-          document.querySelector("select.dir"));
-};
-
-document.querySelector("button.esq").onclick = function() {
-    mover(document.querySelector("select.dir"),
-          document.querySelector("select.esq"));
-};
-<div style="display:flex">
- <select multiple class="esq">
-  <option>Item A</option>
-  <option>Item B</option>
-  <option>Item C</option>
-  <option>Item D</option>
-  <option>Item E</option>
- </select>
- <div style="display:flex; flex-direction:column">
-  <button class="dir">▶</button>
-  <button class="esq">◀</button>
- </div>
- <select multiple class="dir"></select>
-</div>
-*/
 
 export default Calculator

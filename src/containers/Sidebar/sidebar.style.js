@@ -7,7 +7,7 @@ const SidebarWrapper = styled.div`
   .isomorphicSidebar {
     z-index: 1000;
     background: ${palette('secondary', 0)};
-    width: 280px;
+    width: 380px;
     flex: 0 0 280px;
 
     .scrollarea {
