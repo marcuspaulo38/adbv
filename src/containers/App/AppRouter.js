@@ -10,6 +10,10 @@ const routes = [
   {
     path: 'CadastroEA',
     component:asyncComponent(() =>import('../Page/CadastroEA/index')),
+  },
+  {
+    path: 'Listagem',
+    component:asyncComponent(() =>import('../Page/Listagem/index')),
   }
 ];
 

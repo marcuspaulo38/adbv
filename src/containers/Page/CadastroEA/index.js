@@ -333,6 +333,8 @@ class CalculatorComponent extends React.Component {
                            </div>
                     </div>
                   </form>
+                  
+                  
                  </TabContentStyle>
                </TabPane> 
               </Tabs>

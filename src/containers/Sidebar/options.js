@@ -8,6 +8,15 @@ const options = [
     key: 'CadastroEA',
     label: 'Cadastro',
     leftIcon: 'ion-escalar',
+  },
+  {
+    key: 'Listagem',
+    label: 'Listagem',
+    leftIcon: 'ion-escalar',
   }
+
+
+
+
 ];
 export default options;
