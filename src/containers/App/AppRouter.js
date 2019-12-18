@@ -8,6 +8,10 @@ const routes = [
     component: asyncComponent(() => import('../Page/Calculator/index')),
   },
   {
+    path: 'CentroDeCusto',
+    component:asyncComponent(() =>import('../Page/CentroDeCusto/index')),
+  },
+  {
     path: 'CadastroEA',
     component:asyncComponent(() =>import('../Page/CadastroEA/index')),
   },

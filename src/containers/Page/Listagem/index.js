@@ -2,12 +2,24 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { List, Avatar } from 'antd';
-import { Table } from 'antd';
-import { Tabs } from 'antd';
+import { Table, List, Avatar,Tabs , Button, Modal  } from 'antd';
 
 
+const { confirm } = Modal;
 
+
+function showConfirm() {
+  confirm({
+    title: 'Deseja excluir este Item?',
+    content: 'Ao clicar em SIM sairei em  1 secundo...!',
+    onOk() {
+      return new Promise((resolve, reject) => {
+        setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+      }).catch(() => console.log('Algum erro!'));
+    },
+    onCancel() {},
+  });
+}
 
 const columns = [
   {
@@ -39,28 +51,34 @@ const columns = [
     title: 'Total',
     dataIndex: 'totaldescanso',
   },
+   {
+    title: 'Opção',
+    dataIndex: 'editar',
+    render: text => <a>{text}</a>,
+   },
 ];
 const data = [
   {
     key            : '1',
     matricula      : "FORTALEZA - F9612101",
     nome           : "ANTONIO L. RODRIGUES",
-    horainicio     : "08:00 00:00:0000",
-    terminoalmoco  : "12:30 00:00:0000",
-    horafim        : "14:00 00:00:0000",
+    horainicio     : "08:00 00:00",
+    terminoalmoco  : "12:30 00:00",
+    horafim        : "14:00 00:00",
     quantidadehoras: "8,8",
-    totaldescanso  : "01:30 00:00:0000"
-    
+    totaldescanso  : "01:30 00:00:",
+    editar         : "Editar | Excluir"
   },
   {
     key            : '2',
     matricula      : "FORTALEZA - F9412102",
     nome           : "MARCUS PAULO",
-    horainicio     : "08:00 00:00:0000",
-    terminoalmoco  : "12:30 00:00:0000",
-    horafim        : "14:00 00:00:0000",
+    horainicio     : "08:00 00:00",
+    terminoalmoco  : "12:30 00:00",
+    horafim        : "14:00 00:00",
     quantidadehoras: "18,8",
-    totaldescanso  : "02:30 00:00:0000"
+    totaldescanso  : "02:30 00:00",
+    editar         : "Editar | Excluir"
     
   },
   
@@ -68,11 +86,12 @@ const data = [
     key            : '3',
     matricula      : "FORTALEZA - F9512222",
     nome           : "MIKAEL MADSON",
-    horainicio     : "08:10 00:00:0000",
-    terminoalmoco  : "12:40 00:00:0000",
-    horafim        : "14:30 00:00:0000",
+    horainicio     : "08:10 00:00",
+    terminoalmoco  : "12:40 00:00",
+    horafim        : "14:30 00:00",
     quantidadehoras: "5,5",
-    totaldescanso  : "04:30 00:00:0000"
+    totaldescanso  : "01:30 00:00",
+    editar         : "Editar | Excluir"
     
   },
   
@@ -80,10 +99,14 @@ const data = [
 ];
 
 const { TabPane } = Tabs;
+const operations = <Button onClick={showConfirm}>Excluir</Button>;
+
 
 function callback(key) {
   console.log(key);
 }
+
+
 
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
@@ -97,13 +120,10 @@ const rowSelection = {
 
 
 
-
-
-
 const ListItem = ({ onChange, onDelete, value }) => {
   return (
           <div className="Item-container">
-            <Tabs defaultActiveKey="1" onChange={callback}>
+            <Tabs defaultActiveKey="1" onChange={callback} tabBarExtraContent={operations} >
               <TabPane tab="Ações do Site" key="1">
                &nbsp;&nbsp;<img src='./images/lanlink.png'  width='250' height='70'/> Portal TimeSheet <b> > </b>Escala Avulsa
               </TabPane>
@@ -140,13 +160,10 @@ const ListItem = ({ onChange, onDelete, value }) => {
                <TabPane tab="Importar" key="9">
                 Importar
               </TabPane>
-               <TabPane tab="Minhas Aprovações" key="10">
+               <TabPane tab="Relatórios EGP" key="10">
                 Importar
               </TabPane>
-               <TabPane tab="Relatórios" key="11">
-                Relatórios
-              </TabPane>
-            </Tabs>,
+             </Tabs>,
           </div>
   );
 };

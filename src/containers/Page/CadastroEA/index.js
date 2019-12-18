@@ -275,34 +275,7 @@ class CalculatorComponent extends React.Component {
                                        </tr>
                                 </table>
                               </div>
-                              <td>Cadastro de plantão</td>
-                              <div style={{ marginBottom: 16}} >
-                                 <table>
-                                  <tr>
-                                  
-                                   <td>
-                                     <select multiple style={{ width: 225, height:30}} name="cadastroplantao" id="cadastroplantao" value = {this.state.cadastroplantao} onChange = {this.handleCadastroplantaoChange} >
-                                       <option value="a">Poo de Recursos-For</option>
-                                       <option value="b">Poo de Recursos-Rec</option>
-                                       <option value="c">Poo de Recursos-Salv</option>
-                                     </select>
-                                    
-                                   </td>
-                                   <td valign="center">
-                                     &nbsp;&nbsp;<a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('s', 'd')" data-cf-modified-13ce572d586f6e3b4267b954-=""><img src='./images/avancar.png'  width='22' height='22'/></a>
-                                     &nbsp;&nbsp;<a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('d', 's')" data-cf-modified-13ce572d586f6e3b4267b954-=""><img src='./images/retornar.png'  width='22' height='22'/></a>&nbsp;
-                                   </td>
-                                   <td>
-                                    <select multiple style={{ width: 225, height:30}} name="totalcadastroplantao" id="totalcadastroplantao" value = {this.state.totalcadastroplantao} onChange = {this.handleTotalcadastroplantaoChange} >
-                                      <option value="a">Outros</option>
-                                    </select>
-                                   </td>
-                                </tr>
-                               </table>
-                               <div>
-                                 O usuário não poderá escolher a Classificação e o filtro no Formulário - deve-se preencher abaixo
-                               </div>
-                             </div>
+                           
                              
                               <div>
                                 <table>

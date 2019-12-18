@@ -8,7 +8,7 @@ export default props => {
       {props.collapsed ? (
         <div>
           <h3>
-            <Link to="/overview" onClick={() => props.onClick('overview')}>
+            <Link to="#" onClick={() => props.onClick('#')}>
               <i class="fa fa-cloud"></i>
             </Link>
           </h3>
@@ -16,10 +16,10 @@ export default props => {
       ) : (
         <h3>
           <Link
-            to="/overview"
-            onClick={() => props.onClick({ key: 'overview' })}
+            to="#"
+            onClick={() => props.onClick({ key: '#' })}
           >
-            OPÇÕES
+             <img src='./images/logoMenu.png'  width='184px' height='63px'/>
           </Link>
         </h3>
       )}
