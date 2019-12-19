@@ -182,14 +182,14 @@ const dataSourceListaDeProjetos = [
     projeto            : "COMP-INT BEL GOV -RORAIMA- COMPLEMENTAR ON 57121 ON CN 60629 -CC5977CC5971",
     aprovador          : "Paulo Fco Brito Moreira",
     centrodecusto      : "5977",
-    visualizar         : require('C:/projetoADVB/src/image/1.jpg'),
+    visualizar         : "visualizar",
   },
   {
     key                : '2',
     projeto            : "COMP-INT BSB MPU - COMPLEMENTAR 67335 -2013 ON 62295 -CC5977CC123971",
     aprovador          : "Rafael Morais dos Santos",
     centrodecusto      : "6459",
-    visualizar         : require('C:/projetoADVB/src/image/1.jpg'),
+    visualizar         : "visualizar",
   },
     
   
@@ -199,7 +199,7 @@ const dataSourceListaDeProjetos = [
      projeto            : "COMP-INT BSB MPU - COMPLEMENTAR 63335 -2013 ON 62295 -CC5977CC1453971",
     aprovador          : "Rafael Morais dos Santos",
     centrodecusto      : "6479",
-    visualizar         : require('C:/projetoADVB/src/image/1.jpg'),
+    visualizar         : "visualizar",
   },
     
   
@@ -236,8 +236,6 @@ const ListItem = ({ onChange, onDelete, value }) => {
   <div className="card-container">
     <Tabs type="card">
       <TabPane tab="Atividades Internas" key="1" textStyle={{color: '#fff'}} >
-      
-     
         <Table dataSource={dataSourceAtividadesInternas} columns={columnsAtividadeInternas} />;
       </TabPane>
       <TabPane tab="Lista de Contratos" key="2">

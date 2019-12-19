@@ -1,0 +1,82 @@
+:root {
+    --gap: 1rem;
+}
+
+/* Corpo do formulário */
+.form-group {
+    min-height: 20px;
+    padding: 1rem 0;
+    border-bottom: solid 1px #ccc;
+
+    font-size: var(--gap);
+}
+
+.group-title {
+    font-size: 20px;
+    font-weight: 500;
+
+    margin-bottom: 1rem;
+
+    display: block;
+}
+
+.form-group-inputs {
+    min-height: 40px;
+
+    border: solid 1px gray;
+}
+
+.item-subtotal {
+    font-size: 18px;
+    font-weight: 500;
+
+    padding: 1rem 0;
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.item-subtotal > div {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.item-subtotal > div {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.subtotal {
+    margin-right: 4rem;
+
+    font-size: 22px;
+}
+
+.form-group-info {
+    margin-top: var(--gap);
+    padding: 8px;
+    background-color: white;
+
+    display: flex;
+}
+
+.form-group-info-icon {
+    padding: 0 1rem;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 20px;
+    color: #1890ff;
+}
+
+.form-group-info  {
+    padding-bottom: 0;
+}

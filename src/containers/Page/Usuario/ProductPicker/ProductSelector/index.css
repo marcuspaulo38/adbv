@@ -1,0 +1,53 @@
+:root {
+    --box-shadow: 1px 1px 3px rgba(0,0,0,.1), 1px 1px 2px rgba(0,0,0,.1);
+}
+
+.product-btn {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 102px;
+    background-color: #fff;
+    border: 1px solid #f4f4f4;
+    box-shadow: var(--box-shadow);
+
+    overflow: hidden;
+}
+
+.product-btn:hover {
+    border: 1px solid #0078d4;
+}
+
+.product-btn:active {
+    background-color: #cccdce;
+}
+
+.product-btn > .content {
+    padding: 0.3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-btn > .content > .header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.product-btn > .content > .header > .icon > svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-top: auto;
+}
+
+.product-btn > .content > .header > .title {
+    font-size: 1rem;
+    font-family: var(--font-family);
+    font-weight: 500;
+    margin-left: 0.4rem;
+    margin-top: 0.375rem;
+}
+
+.product-btn > .content > .description {
+    text-align: left;
+}
