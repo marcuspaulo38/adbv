@@ -1,43 +1,67 @@
+import ReactDOM from 'react-dom';
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-
-import ReactDOM from 'react-dom';
 import './index.css';
-import { Tabs, Table } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, Table ,Select, Component } from 'antd';
+
+import SearchField from "react-search-field";
+import PropTypes from 'prop-types';
+import Search from 'react-search';
+
+import userpic from '../../../image/visualizar.png';
+
+function Img() {
+ 	return  <img alt="user" src={userpic} height="25" width="25"/>;
+}
+
+function handleChange(value) {
+	  console.log(value); 
+	  alert("Localizando...:"+value);
+}
+
+function onSearchClick(value) {
+	    
+	 console.log(value); 
+	 alert("Localizando...:"+value);
+}
 
 const { TabPane } = Tabs;
-
+const { Option } = Select;
+const rowSelection = {
+		  onChange: (selectedRowKeys, selectedRows) => {
+		    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+		  },
+		  getCheckboxProps: record => ({
+		    disabled: record.name === 'Disabled User', 
+		    name: record.name,
+		  }),
+		};
 
 const dataSourceAtividadesInternas = [
 
   {
     key                : '1',
-    id                 : "01",
     titulo             : "Atendimento Avulso - Público - Fortaleza(CC:X.05.XXXXX.071)",
     aprovador          : "Carmem A. Pires de Castro",
     centrodecusto      : "2.896",
-    centrodecustoafter : "2896",
     visualizar         : "visualizar",
+    
   },
   {
     key                : '2',
-    id                 : "02",
     titulo             : "Melhoria de Continuados - Fortaleza(CC:X.05.XXXXX.031)",
     aprovador          : "Renata Simões Cavalcanti ",
     centrodecusto      : "2.366",
-    centrodecustoafter : "2366",
     visualizar         : "visualizar",
     
   },
   
   {
     key                : '3',
-    id                 : "03",
     titulo             : "Centro de Gerênciamento de Serviços CC:X.05.XXXXX.071)",
     aprovador          : "Lucio Antônio de Velga e Silva",
     centrodecusto      : "2.367",
-    centrodecustoafter : "2367",
     visualizar         : "visualizar",
     
   },
@@ -45,14 +69,12 @@ const dataSourceAtividadesInternas = [
 ];
 
 const columnsAtividadeInternas = [
-  {
-    title: 'ID',
-    dataIndex: 'id',
-  },
+  
   {
     title: 'Titulo',
     dataIndex: 'titulo',
     render: text => <a>{text}</a>,
+    
   },
   {
     title: 'Aprovador',
@@ -62,13 +84,11 @@ const columnsAtividadeInternas = [
     title: 'Centro de Custo',
     dataIndex: 'centrodecusto',
   },
-  {
-    title: 'Centro de Custo After',
-    dataIndex: 'centrodecustoafter',
-  },
+  
   {
     title: 'Visualizar',
     dataIndex: 'visualizar',
+    render: text => <a>{<Img />}</a>,
   },
 ];
 
@@ -119,6 +139,7 @@ const columnsListaDeContratos = [
   {
     title: 'Visualizar',
     dataIndex: 'visualizar',
+    render: text => <a>{<Img />}</a>,
   },
 ];
 
@@ -170,6 +191,7 @@ const columnsListaDeLicenciamentos = [
   {
     title: 'Visualizar',
     dataIndex: 'visualizar',
+    render: text => <a>{<Img />}</a>,
   
   },
 ];
@@ -225,32 +247,67 @@ const columnsListaDeProjetos = [
   {
     title: 'Visualizar',
     dataIndex: 'visualizar',
+    render: text => <a>{<Img />}</a>,
     
     
   },
 ];
 
+class AdvancedSearchForm extends React.Component {
+	   state = {
+	    expand: false,
+	  };
 
-const ListItem = ({ onChange, onDelete, value }) => {
-  return (
+	  render() {
+	    
+return (
   <div className="card-container">
     <Tabs type="card">
       <TabPane tab="Atividades Internas" key="1" textStyle={{color: '#fff'}} >
-        <Table dataSource={dataSourceAtividadesInternas} columns={columnsAtividadeInternas} />;
+          <div>
+		      <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
+		        <SearchField name="localizarAtividades" id="localizarAtividades"  onChange={this.handlelocalizarAtividadesChange} placeholder='Localizar Atividades...' onSearchClick={onSearchClick} />
+		      </h1>
+		      <Table dataSource={dataSourceAtividadesInternas} columns={columnsAtividadeInternas} />
+	          
+	     </div>
       </TabPane>
+      
       <TabPane tab="Lista de Contratos" key="2">
-        <Table dataSource={dataSourceListaDeContratos} columns={columnsListaDeContratos} />;
-      </TabPane>
-      <TabPane tab="Lista de Licenciamentos" key="3">
-       <Table dataSource={dataSourceListaDeLicenciamentos} columns={columnsListaDeLicenciamentos} />;
+	      <div>
+		      <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
+		        <SearchField  name="localizarContratos" id="localizarContratos"  onChange={this.handlelocalizarContratosChange} placeholder='Localizar Contratos...' onSearchClick={onSearchClick} />
+		      </h1>
+		        <Table dataSource={dataSourceListaDeContratos} columns={columnsListaDeContratos} />;
+	     </div>
+	  </TabPane>
+      
+	  <TabPane tab="Lista de Licenciamentos" key="3">
+	  
+		  <div>
+		      <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
+		        <SearchField  name="localizarLicenciamentos" id="localizarLicenciamentos"  onChange={this.handlelocalizarLicenciamentosChange} placeholder='Localizar Licenciamentos...' onSearchClick={onSearchClick} />
+		      </h1>
+		        <Table dataSource={dataSourceListaDeLicenciamentos} columns={columnsListaDeLicenciamentos} />;
+	     </div>
+        
       </TabPane>
       <TabPane tab="Lista de Projetos" key="4">
-       <Table dataSource={dataSourceListaDeProjetos} columns={columnsListaDeProjetos} />;
+      
+	      <div>
+		      <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
+		        <SearchField  name="localizarProjetos" id="localizarProjetos"  onChange={this.handlelocalizarProjetosChange} placeholder='Localizar Projetos' onSearchClick={onSearchClick} />
+		      </h1>
+		        <Table dataSource={dataSourceListaDeProjetos} columns={columnsListaDeProjetos} />;
+	     </div>
       </TabPane>
     </Tabs>
-          </div>
-  );
-};
+  </div>
+);
+	  }
+	}
 
-  
-export default ListItem;
+	const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(AdvancedSearchForm);
+
+
+	export default WrappedAdvancedSearchForm;

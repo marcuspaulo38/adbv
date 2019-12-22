@@ -3,22 +3,21 @@ import { Route, Redirect } from 'react-router-dom';
 import asyncComponent from '../../helpers/AsyncFunc';
 
 const routes = [
-  {
-    path: 'Calculator',
-    component: asyncComponent(() => import('../Page/Calculator/index')),
-  },
+
   {
     path: 'CentroDeCusto',
     component:asyncComponent(() =>import('../Page/CentroDeCusto/index')),
   },
   {
-    path: 'CadastroEA',
-    component:asyncComponent(() =>import('../Page/CadastroEA/index')),
+    path: 'EscAvul',
+    component:asyncComponent(() =>import('../Page/EscAvul/index')),
   },
   {
-    path: 'Listagem',
-    component:asyncComponent(() =>import('../Page/Listagem/index')),
-  }
+    path: 'Usuario',
+    component:asyncComponent(() =>import('../Page/Usuario/index')),
+  },
+ 
+  
 ];
 
 class AppRouter extends Component {

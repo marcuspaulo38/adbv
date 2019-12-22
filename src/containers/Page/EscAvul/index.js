@@ -1,10 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Table } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, Table ,Select } from 'antd';
 import './tab.css';
 
+import SearchField from "react-search-field";
+
+import userpic from '../../../image/editar.png';
+
+
+
 const { TabPane } = Tabs;
+
+const { Option } = Select;
+
+function Img() {
+	  return  <img alt="user" src={userpic} height="25" width="25"/>;
+}
+
+function handleChange(value) {
+	  console.log(value); 
+	  alert("Localizando...:"+value);
+}
+
+function onSearchClick(value) {
+	    
+	 console.log(value); 
+	 alert("Localizando...:"+value);
+}
+
+
+const rowSelection = {
+		  onChange: (selectedRowKeys, selectedRows) => {
+		    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+		  },
+		  getCheckboxProps: record => ({
+		    disabled: record.name === 'Disabled User', 
+		    name: record.name,
+		  }),
+		};
+
 
 
 const columns = [
@@ -38,9 +73,9 @@ const columns = [
     dataIndex: 'totaldescanso',
   },
    {
-    title: 'Opção',
+    title: 'Editar',
     dataIndex: 'editar',
-    render: text => <a>{text}</a>,
+    render: text => <a>{<Img />}</a>,
    },
 ];
 const data = [
@@ -84,40 +119,33 @@ const data = [
  
 ];
 
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', 
-    name: record.name,
-  }),
-};
-
-
-
 class AdvancedSearchForm extends React.Component {
-   state = {
-    expand: false,
-  };
+	   state = {
+	    expand: false,
+	  };
 
-  render() {
-    return (
+	  render() {
+	    
+return (
+ 
        <div className="card-container">
          <Tabs type="card">
               <TabPane tab="Escala Avulsa" key="1" textStyle={{color: '#fff'}} >
                  <Form className="ant-advanced-search-form" onSubmit={this.handleSearch}>
-                      <Row>
-                       <Col span={13}>
-                         <Form.Item label={`Matrícula`}>
-                            <Input type="text"  name="matricula" id="matricula"  onChange = {this.handleMatriculaChange} required="require" />
-                         </Form.Item>
-                       </Col>
-                      </Row>
+                     
                       <Row>
                        <Col span={13}>
                          <Form.Item label={`Nome`}>
-                            <Input type="text"  name="nome" id="nome"  onChange = {this.handleNomeChange} />
+                          <Select
+                             labelInValue
+                             defaultValue={{ key: 'nome01' }}
+                             style={{ width: 420 }}
+                             onChange={handleChange}
+                           >
+                             <Option value="nome01">nome01</Option>
+                             <Option value="nome02">nome02</Option>
+                           </Select>
+                            
                          </Form.Item>
                         <Col span={12}> <br />
                           <div>
@@ -189,20 +217,22 @@ class AdvancedSearchForm extends React.Component {
                  </Form>
               </TabPane>
               <TabPane tab="Lista de Escala Avulsa" key="2">
-                    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />,
+		              <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
+		                <SearchField  name="localizarListaEscalaAvulsa" id="localizarListaEscalaAvulsa"  onChange={this.handlelocalizarListaEscalaAvulsaChange} placeholder='Localizar Escala...' onSearchClick={onSearchClick} />
+	                  </h1>
+                      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />,
               </TabPane>
               
               
           </Tabs>
-       </div>
+          </div>
     );
-  }
-}
+    	  }
+    	}
 
-const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(AdvancedSearchForm);
+    	const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(AdvancedSearchForm);
 
 
-export default WrappedAdvancedSearchForm;
-
+    	export default WrappedAdvancedSearchForm;
 
 
