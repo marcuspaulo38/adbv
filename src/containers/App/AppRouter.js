@@ -3,7 +3,10 @@ import { Route, Redirect } from 'react-router-dom';
 import asyncComponent from '../../helpers/AsyncFunc';
 
 const routes = [
-
+  {
+     path: 'GestaoDeApontamento',
+	 component:asyncComponent(() =>import('../Page/GestaoDeApontamento/index')),
+  },
   {
     path: 'CentroDeCusto',
     component:asyncComponent(() =>import('../Page/CentroDeCusto/index')),
@@ -16,7 +19,11 @@ const routes = [
     path: 'Usuario',
     component:asyncComponent(() =>import('../Page/Usuario/index')),
   },
- 
+  {
+	path: 'Plantonista',
+	component:asyncComponent(() =>import('../Page/Plantonista/index')),
+  },
+  
   
 ];
 

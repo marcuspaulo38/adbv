@@ -220,7 +220,7 @@ return (
 		              <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
 		                <SearchField  name="localizarListaEscalaAvulsa" id="localizarListaEscalaAvulsa"  onChange={this.handlelocalizarListaEscalaAvulsaChange} placeholder='Localizar Escala...' onSearchClick={onSearchClick} />
 	                  </h1>
-                      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />,
+                      <Table columns={columns} dataSource={data} />,
               </TabPane>
               
               

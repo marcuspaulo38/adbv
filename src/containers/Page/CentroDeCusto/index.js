@@ -97,14 +97,14 @@ const dataSourceListaDeContratos = [
   {
     key                : '1',
     contrato           : "CONTRATO PARA 91949 ATIVAÇÃO 0365TJPA",
-    aprovador          : "Carmem A. Pires de Castro",
+    aprovador          : "Allah",
     centrodecusto      : "2896",
     visualizar         : "visualizar",
   },
   {
     key                : '2',
     contrato           : "CONTRATO PARA 91949 ATIVAÇÃO 0365TJPA",
-    aprovador          : "Carmem A. Pires de Castro",
+    aprovador          : "Marcus Paulo",
     centrodecusto      : "2896",
     visualizar         : "visualizar",
     
@@ -209,7 +209,7 @@ const dataSourceListaDeProjetos = [
   {
     key                : '2',
     projeto            : "COMP-INT BSB MPU - COMPLEMENTAR 67335 -2013 ON 62295 -CC5977CC123971",
-    aprovador          : "Rafael Morais dos Santos",
+    aprovador          : "Samuel Teixeira",
     centrodecusto      : "6459",
     visualizar         : "visualizar",
   },
