@@ -3,7 +3,7 @@ const options = [
   
   {
 	key: 'GestaoDeApontamento',
-	label: 'Gestao de apontamentos',
+	label: 'Gestão de apontamentos',
 	leftIcon: 'ion-escalar',
   },
   {
@@ -26,12 +26,7 @@ const options = [
 	label: 'Plantonista',
 	leftIcon: 'ion-escalar',
   },
-  {
-	key: 'Procurar',
-	label: 'Procurar',
-	leftIcon: 'ion-escalar',
-	  },
- 
+  
  
 ];
 export default options;

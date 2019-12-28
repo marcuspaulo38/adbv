@@ -9,6 +9,7 @@ import SearchField from "react-search-field";
 import PropTypes from 'prop-types';
 import Search from 'react-search';
 
+
 import userpic from '../../../image/visualizar.png';
 
 function Img() {
@@ -74,6 +75,7 @@ const columnsAtividadeInternas = [
     title: 'Titulo',
     dataIndex: 'titulo',
     render: text => <a>{text}</a>,
+    
     
   },
   {
@@ -295,10 +297,8 @@ return (
       <TabPane tab="Lista de Projetos" key="4">
       
 	      <div>
-		      <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
-		        <SearchField  name="localizarProjetos" id="localizarProjetos"  onChange={this.handlelocalizarProjetosChange} placeholder='Localizar Projetos' onSearchClick={onSearchClick} />
-		      </h1>
-		        <Table dataSource={dataSourceListaDeProjetos} columns={columnsListaDeProjetos} />;
+		       
+		        
 	     </div>
       </TabPane>
     </Tabs>
