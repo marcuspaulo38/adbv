@@ -15,15 +15,15 @@ function Img() {
  	return  <img alt="user" src={userpic} height="25" width="25"/>;
 }
 
-function handleChange(value) {
-	  console.log(value); 
-	  alert("Localizando...:"+value);
+function handleChange(event) {
+	  console.log(event.target.value); 
+	  alert("Localizando...:"+event.target.value);
 }
 
 function onSearchClick(value) {
 	    
 	 console.log(value); 
-	 alert("Localizando...:"+value);
+	 alert("Localizando1...:"+value);
 }
 
 const { TabPane } = Tabs;

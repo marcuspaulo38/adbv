@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Table ,Select } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, Table ,Select, DatePicker, Checkbox } from 'antd';
 import './tab.css';
 
 import SearchField from "react-search-field";
+
+
 
 import userpic from '../../../image/editar.png';
 import calendario from '../../../image/calendario.png';
@@ -12,13 +14,26 @@ import window from '../../../image/window.jpg';
 import livro from '../../../image/livro.png';
 
 
+import moment from 'moment';
 
+const { MonthPicker, RangePicker } = DatePicker;
+
+const dateFormat = 'DD/MM/YYYY';
+const monthFormat = 'MM/YYYY';
+const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
+
+
+const plainOptions = ['Fortaleza', 'Recife', 'Salvador', 'Aracaju'];
 
 const { TabPane } = Tabs;
 
 const { Option } = Select;
 
 const { TextArea } = Input;
+
+function onChange(checkedValues) {
+	  console.log('checked = ', checkedValues);
+}
 
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;
@@ -133,6 +148,10 @@ const data = [
  
 ];
 
+
+
+
+
 class AdvancedSearchForm extends React.Component {
 	   state = {
 	    expand: false,
@@ -151,66 +170,39 @@ return (
                            <tr>
                             <td>
 	                         <Form.Item label={`Data`}  style={{ marginBottom: 16 , width:400}}>
-	                           <Input type="date" name="date" id="date"  onChange = {this.handleDateChange}  required="require"/>
+	                           <RangePicker
+	                             defaultValue={[moment('01/01/2015', dateFormat), moment('01/01/2015', dateFormat)]}
+	                             format={dateFormat}
+	                             name="date" id="date"  onChange = {this.handleDateChange}  required="require"
+	                           />	   
 	                         </Form.Item>
                             </td>
-                            <td><br />
-	                         <Calendario />
-	                        </td>
-	                       </tr>
+                           </tr>
                          </table>
                          <table>
                            <tr>
                              <td>
-	                          <Form.Item label={`Plantonista Fortaleza`}  style={{ marginBottom: 16 , width:400}}>
-	                             <Input type="text" name="pfortaleza" id="pfortaleza"  onChange = {this.handlepfortalezaChange}  required="require"/>
-	                          </Form.Item>
+	                          <Form.Item label={`Plantonista`}  style={{ marginBottom: 16 , width:400}}>
+		                          <Checkbox.Group options={plainOptions} defaultValue={['Dados']} onChange={onChange} />
+		                      </Form.Item>
 	                         </td>
-                             <td><br />
-                               <Window />&nbsp;<Livro />
-                             </td>
                            </tr>
                          </table>
-                         
-                         <table>
-                         <tr>
-                           <td>
-	                          <Form.Item label={`Plantonista Recife`}  style={{ marginBottom: 16 , width:400}}>
-	                             <Input type="text" name="precife" id="precife"  onChange = {this.handleprecifeChange}  required="require"/>
-	                          </Form.Item>
-	                         </td>
-                           <td><br />
-                             <Window />&nbsp;<Livro />
-                           </td>
-                         </tr>
-                       </table>
                        
-                       <table>
-                       <tr>
-                         <td>
-	                          <Form.Item label={`Plantonista Salvador|Aracaju`}  style={{ marginBottom: 16 , width:400}}>
-	                             <Input type="text" name="psalvadoraracaju" id="psalvadoraracaju"  onChange = {this.handlepsalvadoraracajuChange}  required="require"/>
-	                          </Form.Item>
-	                         </td>
-                         <td><br />
-                           <Window />&nbsp;<Livro />
-                         </td>
-                       </tr>
-                     </table>
-                     <table>
-                     <tr>
-                       <td>
-                       
-	                       <Form.Item label={`Observação`} > 
-	                          <TextArea rows={4} cols={5} style={{ width: 800 }} id="obs" name="obs" />
-	                       </Form.Item> 
-	                     
-	                  </td>
+	                     <table>
+	                     <tr>
+	                       <td>
+	                       
+		                       <Form.Item label={`Observação`} > 
+		                          <TextArea rows={4} cols={5} style={{ width: 800 }} id="obs" name="obs" />
+		                       </Form.Item> 
+		                     
+		                  </td>
+		                         
+	                      
+	                     </tr>
+	                   </table>
 	                         
-                      
-                     </tr>
-                   </table>
-                         
                          
                          
                      </Row>
@@ -231,6 +223,7 @@ return (
 		              <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
 		                <SearchField  name="localizarPlatonista" id="localizarPlanonista"  onChange={this.handlelocalizarPlatonistaChange} placeholder='Localizar Plantonista' onSearchClick={onSearchClick} />
 	                  </h1>
+		               
                       <Table columns={columns} dataSource={data} />,
               </TabPane>
               

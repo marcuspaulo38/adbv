@@ -23,6 +23,10 @@ const routes = [
 	path: 'Plantonista',
 	component:asyncComponent(() =>import('../Page/Plantonista/index')),
   },
+  {
+		path: 'Procurar',
+		component:asyncComponent(() =>import('../Page/Procurar/index')),
+	  },
   
   
 ];

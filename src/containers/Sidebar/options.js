@@ -25,6 +25,11 @@ const options = [
 	key: 'Plantonista',
 	label: 'Plantonista',
 	leftIcon: 'ion-escalar',
+  },
+  {
+	key: 'Procurar',
+	label: 'Procurar',
+	leftIcon: 'ion-escalar',
 	  },
  
  

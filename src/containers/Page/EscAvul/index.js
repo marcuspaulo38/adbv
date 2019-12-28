@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Table ,Select } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, Table ,Select,  } from 'antd';
 import './tab.css';
 
 import SearchField from "react-search-field";
@@ -9,10 +9,12 @@ import SearchField from "react-search-field";
 import userpic from '../../../image/editar.png';
 
 
-
 const { TabPane } = Tabs;
 
 const { Option } = Select;
+
+const tarefas = ["Acordar", "Tomar café"];
+
 
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;
@@ -28,17 +30,6 @@ function onSearchClick(value) {
 	 console.log(value); 
 	 alert("Localizando...:"+value);
 }
-
-
-const rowSelection = {
-		  onChange: (selectedRowKeys, selectedRows) => {
-		    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-		  },
-		  getCheckboxProps: record => ({
-		    disabled: record.name === 'Disabled User', 
-		    name: record.name,
-		  }),
-		};
 
 
 
@@ -127,8 +118,9 @@ class AdvancedSearchForm extends React.Component {
 	  render() {
 	    
 return (
- 
+	
        <div className="card-container">
+      
          <Tabs type="card">
               <TabPane tab="Escala Avulsa" key="1" textStyle={{color: '#fff'}} >
                  <Form className="ant-advanced-search-form" onSubmit={this.handleSearch}>
