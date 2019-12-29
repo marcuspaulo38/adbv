@@ -18,7 +18,6 @@ function Calendario() {
 
 function handleChange(value) {
 	  console.log(value); 
-	  alert("Localizando...:"+value);
 }
 
 function onChange(pagination, filters, sorter, extra) {
