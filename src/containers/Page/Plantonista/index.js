@@ -1,21 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Table ,Select, DatePicker, Checkbox  } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, Select, DatePicker, Checkbox  } from 'antd';
 import './tab.css';
 import SearchePlantonista from "./SearchePlantonista";
-import SearchField from "react-search-field";
-import Highlighter from 'react-highlight-words';
+
+
 import userpic from '../../../image/editar.png';
 import moment from 'moment';
 
-import {
-	  Card,
-	  CardBody,
-	  CardImage,
-	  CardTitle,
-	  CardText
-	} from "mdbreact";
 
 const { MonthPicker, RangePicker } = DatePicker;
 const dateFormat = 'DD/MM/YYYY';

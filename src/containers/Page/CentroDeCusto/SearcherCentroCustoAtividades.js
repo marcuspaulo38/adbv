@@ -1,4 +1,4 @@
-﻿import { Table, Input, Button, Icon } from 'antd';
+import { Table, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 
 
@@ -6,7 +6,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Form } from 'antd';
-import './tab.css';
 
 import userpic from '../../../image/editar.png';
 
@@ -14,28 +13,25 @@ function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;
 }
 
-  const data = [
+const data = [
+
   {
-     key                                 :'1',
-     data                                :'01/07/2013 a 05/12/2013',
-     platonista                          :'José Luiz Pires',
-     observacoes                         :'...',
-     integradocomrubi                    :'...',
-     criadopor                           :'Antonio Luiz',
-     modificadopor                       :'Edson Nascimento',
-     editar                              :'Contrato',
+    key                : '1',
+    titulo             : "Atendimento Avulso - Público - Fortaleza(CC:X.05.XXXXX.071)",
+    aprovador          : "Sarmem A. Pires de Castro",
+    centrodecusto      : "2.896",
+    visualizar         : "visualizar",
+    
   },
   {
-      key                                   :'2',
-      data                                :'01/57/2014 a 05/11/2015',
-      platonista                          :'Marcus Paulo',
-      observacoes                         :'...',
-      integradocomrubi                    :'...',
-      criadopor                           :'José Luiz Pires',
-      modificadopor                       :'Edson Nascimento',
-      editar                              :'Contrato',
+    key                : '2',
+    titulo             : "Melhoria de Continuados - Fortaleza(CC:X.05.XXXXX.031)",
+    aprovador          : "Renata Simões Cavalcanti ",
+    centrodecusto      : "2.366",
+    visualizar         : "visualizar",
+    
   },
- 
+
 ];
 
 	class AdvancedSearchForm extends React.Component {
@@ -115,61 +111,43 @@ function Img() {
   };
 
   render() {
-	  
-  const columns = [
-  {
-    title: 'Data',
-    dataIndex: 'data',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.data - b.data,
-  },
-  {
-    title: 'Platonistas',
-    dataIndex: 'platonista',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.tipodoapontamento.indexOf(value) === 0,
-    sorter: (a, b) => a.platonista.length - b.platonista.length,
-    sortDirections: ['descend', 'ascend'],
-     ...this.getColumnSearchProps('platonista'),
-  },
+  
+    
+const columns = [
   
   {
-    title: 'Observacoes',
-    dataIndex: 'observacoes',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.observacoes - b.observacoes,
-  },
-  {
-    title: 'Integrado com Rubi',
-    dataIndex: 'integradocomrubi',
-  },
-  {
-    title: 'Criado por',
-    dataIndex: 'criadopor',
+    title: 'Titulo',
+    dataIndex: 'titulo',
     render: text => <a>{text}</a>,
     onFilter: (value, record) => record.titulo.indexOf(value) === 0,
-    sorter: (a, b) => a.criadopor.length - b.criadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('criadopor'),
+    sorter: (a, b) => a.titulo.length - b.titulo.length,
+    sortDirections: ['descend', 'ascend'],
+     ...this.getColumnSearchProps('titulo'),
+    
   },
   {
-    title: 'Modificado por',
-    dataIndex: 'modificadopor',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.modificadopor.indexOf(value) === 0,
-    sorter: (a, b) => a.modificadopor.length - b.modificadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('modificadopor'),
-   },
-   {
-    title: 'editar',
-    dataIndex: 'editar',
-    render: text => <a>{<Img />}</a>,
+    title: 'Aprovador',
+    dataIndex: 'aprovador',
+    onFilter: (value, record) => record.aprovador.indexOf(value) === 0,
+    sorter: (a, b) => a.aprovador.length - b.aprovador.length,
+    sortDirections: ['descend', 'ascend'],
+     ...this.getColumnSearchProps('aprovador'),
+  },
+  {
+    title: 'Centro de Custo',
+    dataIndex: 'centrodecusto',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.centrodecusto - b.centrodecusto,
+    
   },
   
-  
+  {
+    title: 'Visualizar',
+    dataIndex: 'visualizar',
+    render: text => <a>{<Img />}</a>,
+  },
 ];
-  
+
     return <Table columns={columns} dataSource={data} />;
   }
 }

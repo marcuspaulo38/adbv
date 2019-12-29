@@ -1,4 +1,4 @@
-﻿import { Table, Input, Button, Icon } from 'antd';
+import { Table, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 
 
@@ -16,25 +16,42 @@ function Img() {
 
   const data = [
   {
-     key                                 :'1',
-     data                                :'01/07/2013 a 05/12/2013',
-     platonista                          :'José Luiz Pires',
-     observacoes                         :'...',
-     integradocomrubi                    :'...',
-     criadopor                           :'Antonio Luiz',
-     modificadopor                       :'Edson Nascimento',
-     editar                              :'Contrato',
+    key            : '1',
+    matricula      : "FORTALEZA - F9612101",
+    nome           : "ANTONIO L. RODRIGUES",
+    horainicio     : "08:00 00:00",
+    terminoalmoco  : "12:30 00:00",
+    horafim        : "14:00 00:00",
+    quantidadehoras: "8,8",
+    totaldescanso  : "01:30 00:00:",
+    editar         : "Editar | Excluir"
   },
   {
-      key                                   :'2',
-      data                                :'01/57/2014 a 05/11/2015',
-      platonista                          :'Marcus Paulo',
-      observacoes                         :'...',
-      integradocomrubi                    :'...',
-      criadopor                           :'José Luiz Pires',
-      modificadopor                       :'Edson Nascimento',
-      editar                              :'Contrato',
+    key            : '2',
+    matricula      : "FORTALEZA - F9412102",
+    nome           : "MARCUS PAULO",
+    horainicio     : "08:00 00:00",
+    terminoalmoco  : "12:30 00:00",
+    horafim        : "14:00 00:00",
+    quantidadehoras: "18,8",
+    totaldescanso  : "02:30 00:00",
+    editar         : "Editar | Excluir"
+    
   },
+  
+  {
+    key            : '3',
+    matricula      : "FORTALEZA - F9512222",
+    nome           : "MIKAEL MADSON",
+    horainicio     : "08:10 00:00",
+    terminoalmoco  : "12:40 00:00",
+    horafim        : "14:30 00:00",
+    quantidadehoras: "5,5",
+    totaldescanso  : "01:30 00:00",
+    editar         : "Editar | Excluir"
+    
+  },
+  
  
 ];
 
@@ -115,59 +132,48 @@ function Img() {
   };
 
   render() {
-	  
-  const columns = [
+    
+    const columns = [
   {
-    title: 'Data',
-    dataIndex: 'data',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.data - b.data,
+    title: 'Matricula',
+    dataIndex: 'matricula',
+    render: text => <a>{text}</a>,
   },
   {
-    title: 'Platonistas',
-    dataIndex: 'platonista',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.tipodoapontamento.indexOf(value) === 0,
-    sorter: (a, b) => a.platonista.length - b.platonista.length,
+    title: 'Nome',
+    dataIndex: 'nome',
+    onFilter: (value, record) => record.nome.indexOf(value) === 0,
+    sorter: (a, b) => a.nome.length - b.nome.length,
     sortDirections: ['descend', 'ascend'],
-     ...this.getColumnSearchProps('platonista'),
+     ...this.getColumnSearchProps('nome'),
   },
-  
   {
-    title: 'Observacoes',
-    dataIndex: 'observacoes',
+    title: 'Inicio',
+    dataIndex: 'horainicio',
     defaultSortOrder: 'descend',
-    sorter: (a, b) => a.observacoes - b.observacoes,
+    sorter: (a, b) => a.horainicio - b.horainicio,
   },
   {
-    title: 'Integrado com Rubi',
-    dataIndex: 'integradocomrubi',
+    title: 'Almoço',
+    dataIndex: 'terminoalmoco',
   },
   {
-    title: 'Criado por',
-    dataIndex: 'criadopor',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.titulo.indexOf(value) === 0,
-    sorter: (a, b) => a.criadopor.length - b.criadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('criadopor'),
+    title: 'Término',
+    dataIndex: 'horafim',
   },
   {
-    title: 'Modificado por',
-    dataIndex: 'modificadopor',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.modificadopor.indexOf(value) === 0,
-    sorter: (a, b) => a.modificadopor.length - b.modificadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('modificadopor'),
+    title: 'Quantidade',
+    dataIndex: 'quantidadehoras',
    },
    {
-    title: 'editar',
+    title: 'Total',
+    dataIndex: 'totaldescanso',
+  },
+   {
+    title: 'Editar',
     dataIndex: 'editar',
     render: text => <a>{<Img />}</a>,
-  },
-  
-  
+   },
 ];
   
     return <Table columns={columns} dataSource={data} />;

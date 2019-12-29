@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Table ,Select, Checkbox  } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs ,Select, Checkbox  } from 'antd';
 import './tab.css';
-import SearchField from "react-search-field";
+
 import SearcheApontamento from "./SearcheApontamento";
 import calendario from '../../../image/calendario.png';
 
@@ -11,15 +11,6 @@ const { TabPane } = Tabs;
 const { Option } = Select;
 const { Search } = Input;
 const { TextArea } = Input;
-const rowSelection = {
-		  onChange: (selectedRowKeys, selectedRows) => {
-		    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-		  },
-		  getCheckboxProps: record => ({
-		    disabled: record.name === 'Disabled User', 
-		    name: record.name,
-		  }),
-		};
 
 function Calendario() {
 	  return  <img alt="user" src={calendario} height="25" width="25"/>;
@@ -28,12 +19,6 @@ function Calendario() {
 function handleChange(value) {
 	  console.log(value); 
 	  alert("Localizando...:"+value);
-}
-
-function onSearchClick(value) {
-	    
-	 console.log(value); 
-	 alert("Localizando...:"+value);
 }
 
 function onChange(pagination, filters, sorter, extra) {

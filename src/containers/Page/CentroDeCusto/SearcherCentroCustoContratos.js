@@ -1,4 +1,4 @@
-﻿import { Table, Input, Button, Icon } from 'antd';
+import { Table, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 
 
@@ -6,37 +6,43 @@ import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Form } from 'antd';
-import './tab.css';
 
-import userpic from '../../../image/editar.png';
+import userpic from '../../../image/visualizar.png';
 
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;
 }
 
-  const data = [
+
+const data = [
+
   {
-     key                                 :'1',
-     data                                :'01/07/2013 a 05/12/2013',
-     platonista                          :'José Luiz Pires',
-     observacoes                         :'...',
-     integradocomrubi                    :'...',
-     criadopor                           :'Antonio Luiz',
-     modificadopor                       :'Edson Nascimento',
-     editar                              :'Contrato',
+    key                : '1',
+    contrato           : "CONTRATO PARA 91949 ATIVAÇÃO 0365TJPA",
+    aprovador          : "Allah",
+    centrodecusto      : "2896",
+    visualizar         : "visualizar",
   },
   {
-      key                                   :'2',
-      data                                :'01/57/2014 a 05/11/2015',
-      platonista                          :'Marcus Paulo',
-      observacoes                         :'...',
-      integradocomrubi                    :'...',
-      criadopor                           :'José Luiz Pires',
-      modificadopor                       :'Edson Nascimento',
-      editar                              :'Contrato',
+    key                : '2',
+    contrato           : "CONTRATO PARA 91949 ATIVAÇÃO 0365TJPA",
+    aprovador          : "Marcus Paulo",
+    centrodecusto      : "2896",
+    visualizar         : "visualizar",
+    
+  },
+  
+  {
+    key                : '3',
+    contrato           : "CONTRATO PARA 91949 ATIVAÇÃO 0365TJPA",
+    aprovador          : "Carmem A. Pires de Castro",
+    centrodecusto      : "2896",
+    visualizar         : "visualizar",
+    
   },
  
 ];
+
 
 	class AdvancedSearchForm extends React.Component {
   	   state = {
@@ -115,61 +121,39 @@ function Img() {
   };
 
   render() {
-	  
-  const columns = [
-  {
-    title: 'Data',
-    dataIndex: 'data',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.data - b.data,
-  },
-  {
-    title: 'Platonistas',
-    dataIndex: 'platonista',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.tipodoapontamento.indexOf(value) === 0,
-    sorter: (a, b) => a.platonista.length - b.platonista.length,
-    sortDirections: ['descend', 'ascend'],
-     ...this.getColumnSearchProps('platonista'),
-  },
   
+ 
+const columns = [
   {
-    title: 'Observacoes',
-    dataIndex: 'observacoes',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.observacoes - b.observacoes,
-  },
-  {
-    title: 'Integrado com Rubi',
-    dataIndex: 'integradocomrubi',
-  },
-  {
-    title: 'Criado por',
-    dataIndex: 'criadopor',
+    title: 'Contrato',
+    dataIndex: 'contrato',
     render: text => <a>{text}</a>,
+    onFilter: (value, record) => record.contrato.indexOf(value) === 0,
+    sorter: (a, b) => a.contrato.length - b.contrato.length,
+    sortDirections: ['descend', 'ascend'],
+     ...this.getColumnSearchProps('contrato'),
+  },
+  {
+    title: 'Aprovador',
+    dataIndex: 'aprovador',
     onFilter: (value, record) => record.titulo.indexOf(value) === 0,
-    sorter: (a, b) => a.criadopor.length - b.criadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('criadopor'),
+    sorter: (a, b) => a.aprovador.length - b.aprovador.length,
+    sortDirections: ['descend', 'ascend'],
+     ...this.getColumnSearchProps('aprovador'),
+   
   },
   {
-    title: 'Modificado por',
-    dataIndex: 'modificadopor',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.modificadopor.indexOf(value) === 0,
-    sorter: (a, b) => a.modificadopor.length - b.modificadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('modificadopor'),
-   },
-   {
-    title: 'editar',
-    dataIndex: 'editar',
+    title: 'Centro de Custo',
+    dataIndex: 'centrodecusto',
+  },
+  {
+    title: 'Visualizar',
+    dataIndex: 'visualizar',
     render: text => <a>{<Img />}</a>,
   },
-  
-  
-];
-  
+];    
+
+
     return <Table columns={columns} dataSource={data} />;
   }
 }

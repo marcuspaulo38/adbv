@@ -1,4 +1,4 @@
-﻿import { Table, Input, Button, Icon } from 'antd';
+import { Table, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words';
 
 
@@ -16,24 +16,22 @@ function Img() {
 
   const data = [
   {
-     key                                 :'1',
-     data                                :'01/07/2013 a 05/12/2013',
-     platonista                          :'José Luiz Pires',
-     observacoes                         :'...',
-     integradocomrubi                    :'...',
-     criadopor                           :'Antonio Luiz',
-     modificadopor                       :'Edson Nascimento',
-     editar                              :'Contrato',
+    key                           :'1',
+    colaborador                   : "Antonio Dos Santos",
+    datainicio                    : "21/01/2019",
+    datafim                       : "",
+    gestor                        : "Lucio Amâncio",
+    apontamentocontroladoporescala: "Não",
+    editar                        : "Visualizar",
   },
   {
-      key                                   :'2',
-      data                                :'01/57/2014 a 05/11/2015',
-      platonista                          :'Marcus Paulo',
-      observacoes                         :'...',
-      integradocomrubi                    :'...',
-      criadopor                           :'José Luiz Pires',
-      modificadopor                       :'Edson Nascimento',
-      editar                              :'Contrato',
+    key                           :'2',
+    colaborador                   : "Jose Dos Santos",
+    datainicio                    : "21/10/2019",
+    datafim                       : "",
+    gestor                        : "Antonio Amâncio",
+    apontamentocontroladoporescala: "Não",
+    editar                        : "Visualizar",
   },
  
 ];
@@ -115,60 +113,47 @@ function Img() {
   };
 
   render() {
-	  
+    
   const columns = [
   {
-    title: 'Data',
-    dataIndex: 'data',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.data - b.data,
-  },
-  {
-    title: 'Platonistas',
-    dataIndex: 'platonista',
+    title: 'Colaborador',
+    dataIndex: 'colaborador',
     render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.tipodoapontamento.indexOf(value) === 0,
-    sorter: (a, b) => a.platonista.length - b.platonista.length,
+    onFilter: (value, record) => record.colaborador.indexOf(value) === 0,
+    sorter: (a, b) => a.colaborador.length - b.colaborador.length,
     sortDirections: ['descend', 'ascend'],
-     ...this.getColumnSearchProps('platonista'),
+     ...this.getColumnSearchProps('colaborador'),
   },
-  
   {
-    title: 'Observacoes',
-    dataIndex: 'observacoes',
+    title: 'Inicio de Apontamento',
+    dataIndex: 'datainicio',
     defaultSortOrder: 'descend',
-    sorter: (a, b) => a.observacoes - b.observacoes,
+    sorter: (a, b) => a.datainicio - b.datainicio,
   },
   {
-    title: 'Integrado com Rubi',
-    dataIndex: 'integradocomrubi',
+    title: 'Termino de Apontamento',
+    dataIndex: 'datafim',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.datafim - b.datafim,
   },
   {
-    title: 'Criado por',
-    dataIndex: 'criadopor',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.titulo.indexOf(value) === 0,
-    sorter: (a, b) => a.criadopor.length - b.criadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('criadopor'),
-  },
-  {
-    title: 'Modificado por',
-    dataIndex: 'modificadopor',
-    render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.modificadopor.indexOf(value) === 0,
-    sorter: (a, b) => a.modificadopor.length - b.modificadopor.length,
-    sortDirections: ['descend'],
-    ...this.getColumnSearchProps('modificadopor'),
+    title: 'Gestor',
+    dataIndex: 'gestor',
+    onFilter: (value, record) => record.colaborador.indexOf(value) === 0,
+    sorter: (a, b) => a.gestor.length - b.gestor.length,
+    sortDirections: ['descend', 'ascend'],
+     ...this.getColumnSearchProps('gestor'),
    },
    {
-    title: 'editar',
+    title: 'Apontamento Controlado por Escala',
+    dataIndex: 'apontamentocontroladoporescala',
+  },
+   {
+    title: 'Editar',
     dataIndex: 'editar',
     render: text => <a>{<Img />}</a>,
-  },
-  
-  
-];
+   },
+];  
   
     return <Table columns={columns} dataSource={data} />;
   }

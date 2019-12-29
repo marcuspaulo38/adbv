@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Form, Input, Row, Col, Button, Tabs, Table ,Select } from 'antd';
 import './tab.css';
-import SearchField from "react-search-field";
 import userpic from '../../../image/editar.png';
+import SearcherUsuario from './SearcherUsuario';
+
 
 
 function Img() {
@@ -30,59 +31,7 @@ const { Option } = Select;
 
 const { TextArea } = Input;
 
-const columns = [
-  {
-    title: 'Colaborador',
-    dataIndex: 'colaborador',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'Inicio de Apontamento',
-    dataIndex: 'datainicio',
-  },
-  {
-    title: 'Termino de Apontamento',
-    dataIndex: 'datafim',
-  },
-  {
-    title: 'Gestor',
-    dataIndex: 'gestor',
-   },
-   {
-    title: 'Apontamento Controlado por Escala',
-    dataIndex: 'apontamentocontroladoporescala',
-  },
-   {
-    title: 'Editar',
-    dataIndex: 'editar',
-    render: text => <a>{<Img />}</a>,
-   },
-];
 
-	 
-const data = [
-  {
-    key                           : '1',
-    colaborador                   : "Antonio Dos Santos",
-    datainicio                    : "21/01/2019",
-    datafim                       : "",
-    gestor                        : "Lucio Amâncio",
-    apontamentocontroladoporescala: "Não",
-    editar                        : "Visualizar",
-  },
-  {
-    key            : '2',
-    colaborador                   : "Ademira Maria",
-    datainicio                    : "05/01/2019",
-    datafim                       : "",
-    gestor                        : "Jorge Silveira",
-    apontamentocontroladoporescala: "Não",
-    editar                        : "Visualizar",
-    
-  },
-  
- 
-];
 
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
@@ -282,10 +231,8 @@ class AdvancedSearchForm extends React.Component {
               </TabPane>
               <TabPane tab="Lista de Usuários" key="2">
 	              <div>
-	                <h1 style={{ marginTop: '0em', textAlign: 'right' }}>
-	                  <SearchField  name="localizarUsuario" id="localizarUsuario"  onChange={this.handlelocalizarUsuarioChange} placeholder='Localizar Usuário..' onSearchClick={onSearchClick} />
-	                </h1>
-	                <Table columns={columns} dataSource={data} />,
+	               
+	                <SearcherUsuario />,
 	             </div>
               </TabPane>
               

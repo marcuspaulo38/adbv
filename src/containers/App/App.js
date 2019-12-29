@@ -13,21 +13,6 @@ import AppHolder from './commonStyle';
 import './global.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import novoApontamento from '../../image/novoApontamento.png';
-import meuHistorico from '../../image/meuHistorico.png';
-import meuControleHoras from '../../image/meuControleHoras.png';
-
-function NovoApontamento() {
- 	return  <a href="#"><img alt="user" src={novoApontamento} height="238" width="238"/> </a>;
-}
-function MeuHistorico() {
- 	return  <img alt="user" src={meuHistorico} height="238" width="238"/>;
-}
-function MeuControleHoras() {
- 	return  <img alt="user" src={meuControleHoras} height="238" width="238"/>;
-}
-
-
 const { Content, Footer } = Layout;
 const { toggleAll } = appActions;
 class App extends Component {
