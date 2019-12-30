@@ -1,40 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Table ,Select   } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs   } from 'antd';
 import './tab.css';
 import SearcherEscalaAvulsa from './SearcherEscalaAvulsa';
-import userpic from '../../../image/editar.png';
 import { AutoComplete } from 'antd';
 
 const { TabPane } = Tabs;
-const { Option } = Select;
-const onSearch = searchText => {
-    this.setState({
-      dataSource: !searchText ? [] : [searchText, searchText.repeat(2), searchText.repeat(3)],
-    });
-  };
-const onChange = value => {
-    this.setState({ value });
-};
 
 function onSelect(value) {
   console.log('onSelect', value);
-}
-
-function Img() {
-	  return  <img alt="user" src={userpic} height="25" width="25"/>;
-}
-
-function handleChange(value) {
-	  console.log(value); 
-	  alert("Localizando...:"+value);
-}
-
-function onSearchClick(value) {
-	    
-	 console.log(value); 
-	 alert("Localizando...:"+value);
 }
 
 class AdvancedSearchForm extends React.Component {
@@ -42,7 +17,7 @@ class AdvancedSearchForm extends React.Component {
 	    expand: false,
 	    value: '',
 	    dataSource: ['Marcus Paulo', 'Samuel', 'Carlos', 'Samanta'],
-	  };
+};
 
   render(){
 		    const { dataSource, value } = this.state;

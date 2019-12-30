@@ -4,7 +4,11 @@ import asyncComponent from '../../helpers/AsyncFunc';
 
 const routes = [
   {
-     path: 'GestaoDeApontamento',
+   path: '',
+	 component:asyncComponent(() =>import('../Page/LandingPage/index')),
+  },
+  {
+   path: 'GestaoDeApontamento',
 	 component:asyncComponent(() =>import('../Page/GestaoDeApontamento/index')),
   },
   {

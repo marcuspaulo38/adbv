@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Form } from 'antd';
 
-import userpic from '../../../image/editar.png';
+import userpic from '../../../image/visualizar.png';
 
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;

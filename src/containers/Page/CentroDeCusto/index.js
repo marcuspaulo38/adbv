@@ -3,17 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Form, Tabs, Table } from 'antd';
+import { Form, Tabs } from 'antd';
 
 import SearcherCentroCustoAtividades from "./SearcherCentroCustoAtividades";
 import SearcherCentroCustoContratos from "./SearcherCentroCustoContratos";
 import  SearcherCentroCustoLicenciamentos from "./SearcherCentroCustoLicenciamentos";
 import SearcherCentroCustoProjetos from "./SearcherCentroCustoProjetos";
-import userpic from '../../../image/visualizar.png';
 
-function Img() {
- 	return  <img alt="user" src={userpic} height="25" width="25"/>;
-}
 
 const { TabPane } = Tabs;
 

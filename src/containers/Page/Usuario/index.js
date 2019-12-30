@@ -1,32 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Table ,Select } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, Select } from 'antd';
 import './tab.css';
-import userpic from '../../../image/editar.png';
 import SearcherUsuario from './SearcherUsuario';
 
 
 const { TabPane } = Tabs;
 const { Option } = Select;
 const { TextArea } = Input;
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', 
-    name: record.name,
-  }),
-};
-
-function Img() {
-  return  <img alt="user" src={userpic} height="25" width="25"/>;
-}
-
-function handleChange(value) {
-	  console.log(value); 
-}
 
 
 class AdvancedSearchForm extends React.Component {

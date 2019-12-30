@@ -1,28 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Select, DatePicker, Checkbox  } from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, DatePicker, Checkbox  } from 'antd';
 import './tab.css';
 import SearchePlantonista from "./SearchePlantonista";
 
 
-import userpic from '../../../image/editar.png';
+
 import moment from 'moment';
 
 
-const { MonthPicker, RangePicker } = DatePicker;
+const { RangePicker } = DatePicker;
 const dateFormat = 'DD/MM/YYYY';
-const monthFormat = 'MM/YYYY';
-const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
 const plainOptions = ['Fortaleza', 'Recife', 'Salvador', 'Aracaju'];
 const { TabPane } = Tabs;
-const { Option } = Select;
+
 const { TextArea } = Input;
 
 
-function Img() {
-	  return  <img alt="user" src={userpic} height="25" width="25"/>;
-}
 
 function onChange(pagination, filters, sorter, extra) {
 	  console.log('params', pagination, filters, sorter, extra);
@@ -50,7 +45,7 @@ render() {
 		                            <td>
 			                         <Form.Item label={`Data`}  style={{ marginBottom: 16 , width:400}}>
 			                           <RangePicker
-			                             defaultValue={[moment('01/01/2015', dateFormat), moment('01/01/2015', dateFormat)]}
+			                             defaultValue={[moment('01/01/2015', dateFormat), moment('31/12/2019', dateFormat)]}
 			                             format={dateFormat}
 			                             name="date" id="date" onChange = {this.handleDateChange}  required="require"
 			                           />	   
