@@ -19,7 +19,7 @@ export default props => {
             to="#"
             onClick={() => props.onClick({ key: '#' })}
           >
-             <img src='./images/logoMenu.png'  width='184px' height='63px'/>
+            <img title='Página Inicial' src='./images/logoMenu.png'  width='184px' height='63px'/>
           </Link>
         </h3>
       )}

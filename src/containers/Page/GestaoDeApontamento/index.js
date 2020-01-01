@@ -3,14 +3,20 @@ import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Form, Input, Row, Col, Button, Tabs ,Select, Checkbox  } from 'antd';
 import './tab.css';
+import { AutoComplete } from 'antd';
 
 import SearcheApontamento from "./SearcheApontamento";
 import calendario from '../../../image/calendario.png';
+
 
 const { TabPane } = Tabs;
 const { Option } = Select;
 const { Search } = Input;
 const { TextArea } = Input;
+
+function onSelect(value) {
+	  console.log('onSelect', value);
+}
 
 function Calendario() {
 	  return  <img alt="user" src={calendario} height="25" width="25"/>;
@@ -27,12 +33,14 @@ function onChange(pagination, filters, sorter, extra) {
 class AdvancedSearchForm extends React.Component {
 	   state = {
 	    expand: false,
+	    dataSource: ['Financeiro(CC:X01 XXXXX062', 'Financeiro(CC:X02 XXXXX047', 'Gerênciamento de inovação'],
 	  };
 
-render() {
+
 	    
- return (
- 
+	   render(){
+		    const { dataSource, value } = this.state;
+			 return (
        <div className="card-container">
          <Tabs type="card">
               <TabPane tab="Novo Item" key="1" textStyle={{color: '#fff'}} >
@@ -109,8 +117,23 @@ render() {
 	                                 </Form.Item> 
                                   
                                  </td>
-                                </tr>
+                             </tr>
                            </table>
+                           {/*<table>
+                           <tr>
+                             <td>
+	                             <Form.Item label={`Selecione a atividade inteira`} > 
+	                             <AutoComplete
+		                           dataSource={dataSource}
+		                           style={{ width: 400 }} id="atividadeinteira" name="atividadeinteira"
+		                           onSelect={onSelect}
+		                           onSearch={this.onSearch}
+		                           placeholder="Clique aqui para buscar..."
+		                         />
+	                              </Form.Item> 
+	                         </td>
+	                       </tr>
+                        </table>*/}
                            <table>
                               <tr>
                                 <td>
@@ -176,13 +199,9 @@ render() {
               
           </Tabs>
           </div>
-    );
-    	  }
-    	}
-
-    	const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(AdvancedSearchForm);
-
-
-    	export default WrappedAdvancedSearchForm;
-
+	);
+  }
+}
+const WrappedAdvancedSearchForm = Form.create({ name: 'advanced_search' })(AdvancedSearchForm);
+ export default WrappedAdvancedSearchForm;
 
