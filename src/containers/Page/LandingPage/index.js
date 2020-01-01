@@ -9,6 +9,7 @@ import controle from '../../../image/meuControleHoras.png';
 import historico from '../../../image/meuHistorico.png';
 
 
+
 function Apontamento() {
 	  return  <a href="#" title="Clique para  visualizar ou criar um apontamento"><img alt="user" src={apontamento} height="250" width="250"/></a>;
            
@@ -18,7 +19,7 @@ function Controle() {
 	  return   <a href="#" title="Clique para ir para seu controle"><img alt="user" src={controle} height="250" width="250"/></a>;
 }
 function Historico() {
-	  return   <a href="#" title="Clique para visualizar o histórico"><img alt="user" src={historico} height="250" width="250"/></a>;
+	  return   <a href="HistoricoAtividades" title="Clique para visualizar o histórico"><img alt="user" src={historico} height="250" width="250"/></a>;
 }
 
 

@@ -8,6 +8,10 @@ const routes = [
 	 component:asyncComponent(() =>import('../Page/LandingPage/index')),
   },
   {
+   path: 'HistoricoAtividades',
+	 component:asyncComponent(() =>import('../Page/LPHistoricoAtividades/index')),
+  },
+  {
    path: 'GestaoDeApontamento',
 	 component:asyncComponent(() =>import('../Page/GestaoDeApontamento/index')),
   },
@@ -18,6 +22,10 @@ const routes = [
   {
     path: 'EscAvul',
     component:asyncComponent(() =>import('../Page/EscAvul/index')),
+  },
+  {
+   path: 'PeriodoDeFechamento',
+	 component:asyncComponent(() =>import('../Page/PeriodoDeFechamento/index')),
   },
   {
     path: 'Usuario',

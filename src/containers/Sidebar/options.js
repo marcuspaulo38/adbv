@@ -17,6 +17,11 @@ const options = [
     leftIcon: 'ion-escalar',
   },
   {
+    key: 'PeriodoDeFechamento',
+    label: 'Periodo de Fechamento',
+    leftIcon: 'ion-escalar',
+  },
+  {
     key: 'Usuario',
     label: 'Usuario',
     leftIcon: 'ion-escalar',
