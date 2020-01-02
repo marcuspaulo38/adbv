@@ -31,12 +31,6 @@ const options = [
 	label: 'Plantonista',
 	leftIcon: 'ion-escalar',
   },
-  {
-	key: 'TesteForm',
-	label: 'TesteForm',
-	leftIcon: 'ion-escalar',
-  },
-  
   
  
 ];

@@ -35,12 +35,6 @@ const routes = [
 	path: 'Plantonista',
 	component:asyncComponent(() =>import('../Page/Plantonista/index')),
   },
-  {
-    path: 'TesteForm',
-    component:asyncComponent(() =>import('../Page/TesteForm/index')),
- },
- 
-  
   
   
 ];
