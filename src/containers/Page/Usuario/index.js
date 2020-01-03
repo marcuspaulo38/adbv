@@ -7,13 +7,29 @@ import Highlighter from 'react-highlight-words';
 import userpic from '../../../image/editar.png';
 import './tab.css';
 import { cpfMask } from './Mask';
+import { AutoComplete } from 'antd';
 
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;
 }
-//const { Column } = Table;
-const { TabPane } = Tabs;
 const { Option } = Select;
+function onChange(value) {
+  console.log(`selected ${value}`);
+}
+
+function onBlur() {
+  console.log('blur');
+}
+
+function onFocus() {
+  console.log('focus');
+}
+
+function onSearch(val) {
+  console.log('search:', val);
+}
+
+const { TabPane } = Tabs;
 const { TextArea } = Input;
 
 class AdvancedSearchForm extends React.Component {
@@ -33,21 +49,22 @@ class AdvancedSearchForm extends React.Component {
                   cpf                   :''
                 };
     this.handleOnChangeColaborador       = this.handleOnChangeColaborador.bind(this);
-    this.handleOnChangeaApontamentoEscala = this.handleOnChangeaApontamentoEscala.bind(this);
+    this.handleOnChangeaApontamentoEscala= this.handleOnChangeaApontamentoEscala.bind(this);
     this.handleOnChangeRestricao         = this.handleOnChangeRestricao.bind(this);
     this.handleOnChangeTipoRestricao     = this.handleOnChangeTipoRestricao.bind(this);
     this.handleOnChangeEcolaborador      = this.handleOnChangeEcolaborador.bind(this);
     this.handleChange                    = this.handleChange.bind(this);
     this.handleSubmit                    = this.handleSubmit.bind(this);
-    this.modal1Visible = false;
-    this.pagination = {};
-    this.loading= false;
+    this.modalUsuarioVisible             = false;
+    this.pagination                      = {};
+    this.loading                         = false;
+    
  
     
  }
  
-setModal1Visible(modal1Visible) {
-    this.setState({ modal1Visible });
+setModalUsuarioVisible(modalUsuarioVisible) {
+    this.setState({ modalUsuarioVisible });
 }
  
 handleOnChangeColaborador = (selectedValue) => {
@@ -104,12 +121,12 @@ handleChange(event) {
       }
        if (event.target.name == "cargoprestacaoservico") {
              this.setState({
-                 cargoprestacaoservico: event.target.value
+                 cargoprestacaoservico: (event.target.value.toUpperCase())
              });
       }        
       if (event.target.name == "prefiltro") {
               this.setState({
-                prefiltro: event.target.value
+                prefiltro: (event.target.value.toUpperCase())
           });
       }
       if (event.target.name == "cpf") {
@@ -135,6 +152,7 @@ handleSubmit(event) {
     alert('Pré - Fltro: '              + this.state.prefiltro);
     alert('CPF: '                      + this.state.cpf);*/
     event.preventDefault();
+    this.setModalUsuarioVisible(true);
 }
 
  getColumnSearchProps = dataIndex => ({
@@ -307,18 +325,31 @@ render() {
 		       <div className="card-container">
 		         <Tabs type="card">
 		              <TabPane tab="Novo Cadastro" key="1" textStyle={{color: '#fff'}} >
-                    
-		                 <Form className="ant-advanced-search-form" onSubmit={this.handleSubmit}>
+                     <Form className="ant-advanced-search-form" onSubmit={this.handleSubmit}>
 		                      <Row>
 		                       <Col span={13}>
 		                         <div style={{ marginBottom: 25 , width:600}}>
 				                               Colaborador<br />
-                                       <Select onSelect={(value, event) => this.handleOnChangeColaborador(value, event)} style={{ width: 600 }}> 
-					                                  <Option value="colaborador01">Colaborador01</Option>
-					                                  <Option value="colaborador02">Colaborador02</Option>
-					                             </Select>
-                                     
-			                       </div>
+                                       
+                                       <Select
+                                          showSearch
+                                          style={{ width: 600 }}
+                                          placeholder="Selecione o colaborador"
+                                          optionFilterProp="children"
+                                          onChange={onChange}
+                                          onFocus={onFocus}
+                                          onBlur={onBlur}
+                                          onSearch={onSearch}
+                                          onSelect={(value, event) => this.handleOnChangeColaborador(value, event)}
+                                          filterOption={(input, option) =>
+                                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                          } required="required"
+                                        >
+                                          <Option value="Colaborador01">Colaborador 01</Option>
+                                          <Option value="Colaborador02">Colaborador 02</Option>
+                                          <Option value="Colaborador03">Colaborador 03</Option>
+                                        </Select>,
+                             </div>
 		                        <Col span={12}>
 		                          <div>
 		                            <table>
@@ -327,7 +358,7 @@ render() {
 		                                  <div style={{ marginBottom: 16 , width:300}}>
 		                                     Data Inicio de Apontamento
 		                                     <br />
-		                                     <Input type="date" name="datainicioapontamento" id="datainicioapontamento" value={this.state.datainicioapontamento}  onChange={this.handleChange}/>
+		                                     <Input type="date" name="datainicioapontamento" id="datainicioapontamento" value={this.state.datainicioapontamento}  onChange={this.handleChange} required="required"/>
 		                                   </div>
 		                                 </td>
 		                                  <td>
@@ -335,7 +366,7 @@ render() {
 		                                     Data de Término Apontamento 
 		                                     <br />
 		                                     
-		                                     <Input type="date" name="dataterminoapontamento" id="dataterminoapontamento"  value={this.state.dataterminoapontamento}  onChange={this.handleChange}/>
+		                                     <Input type="date" name="dataterminoapontamento" id="dataterminoapontamento"  value={this.state.dataterminoapontamento}  onChange={this.handleChange} required="required"/>
 		                                   </div>
 		                                 </td>
 		                                </tr>
@@ -355,8 +386,7 @@ render() {
 			                             <td>
 			                               <div style={{ marginBottom: 16 , width:400}}>
 			                                  Gestor
-                                       
-			                                  <Input type="text" name="gestor" id="gestor"  value={this.state.gestor}  onChange={this.handleChange}/>
+                                        <Input type="text" name="gestor" id="gestor"  value={this.state.gestor}  onChange={this.handleChange} required="required"/>
 			                                  <i>O usuário que receberá informações.</i>
 			                                </div>
 			                              </td>
@@ -364,7 +394,7 @@ render() {
 				                               <div style={{ marginBottom: 16 , width:400}}>
 					                               Apontamento por escala? <br />
 						                                <Select onSelect={(value, event) => this.handleOnChangeaApontamentoEscala(value, event)} style={{ width: 400 }}
-						                                  name="apontamentoescala" id="apontamentoescala"  > 
+						                                  name="apontamentoescala" id="apontamentoescala"  required="required"> 
 						                                  <Option value="sim">Sim</Option>
 						                                  <Option value="não">Não</Option>
 						                                </Select>
@@ -380,7 +410,7 @@ render() {
 				                          <td>
 				                            <div style={{ marginBottom: 16 , width:400}}>
 				                               Cargo Prestação de Serviço
-				                               <Input type="text" name="cargoprestacaoservico" id="cargoprestacaoservico"  value={this.state.cargoprestacaoservico}  onChange={this.handleChange}/>
+				                               <Input type="text" name="cargoprestacaoservico" id="cargoprestacaoservico"  value={this.state.cargoprestacaoservico}  onChange={this.handleChange} required="required"/>
 				                                 <i>Preencher somente se o colaborador presta serviço para cliente.</i>
 				                               
 				                             </div>
@@ -390,7 +420,7 @@ render() {
 						                               Possui Restrição? <br />
 							                               <Select onSelect={(value, event) => this.handleOnChangeTipoRestricao(value, event)}
 							                                  style={{ width: 400 }}
-							                                  name="restricao" id="restricao"  >
+							                                  name="restricao" id="restricao"  required="required" >
 							                                  <Option value="sim">Sim</Option>
 							                                  <Option value="sim">Não</Option>
 							                                </Select>
@@ -406,7 +436,7 @@ render() {
 				                       <td>
 				                         <div style={{ marginBottom: 16 , width:400}}>
 				                            Pré-Filtro
-				                            <Input type="text" name="prefiltro" id="prefiltro"  value={this.state.prefiltro}  onChange={this.handleChange}/>
+				                            <Input type="text" name="prefiltro" id="prefiltro"  value={this.state.prefiltro}  onChange={this.handleChange} required="required"/>
 				                          </div>
 				                        </td>
 				                         <td>
@@ -414,7 +444,7 @@ render() {
 						                               Tipo Restrição? <br />
 							                               <Select onSelect={(value, event) => this.handleOnChangeTipoRestricao(value, event)}
 							                                  style={{ width: 400 }}
-							                                  name="tiporestricao" id="tiporestricao"  >
+							                                  name="tiporestricao" id="tiporestricao" required="required" >
 							                                  <Option value="nenhuma">Nenhuma</Option>
 							                                  <Option value="retricao">Restrição</Option>
 							                                </Select>
@@ -429,7 +459,7 @@ render() {
 					                      É Colaborador? <br />
 					                      <Select onSelect={(value, event) => this.handleOnChangeEcolaborador(value, event)}
 					                         style={{ width: 400 }}
-					                         name="ecolaborador" id="ecolaborador" >
+					                         name="ecolaborador" id="ecolaborador" required="required" >
 					                         <Option value="sim">Sim</Option>
 					                         <Option value="nao">Não</Option>
 					                       </Select>
@@ -439,7 +469,7 @@ render() {
 					                      <td>
 						                     <div style={{ marginBottom: 16 , width:400}}>
 						                       CPF
-						                      <Input type="text" name="cpf" id="cpf"  value={this.state.cpf}  onChange={this.handleChange}/>
+						                      <Input type="text" name="cpf" id="cpf"  value={this.state.cpf}  onChange={this.handleChange} required="required"/>
 							                 </div>
 					                     </td>
 					                   </tr>
@@ -450,18 +480,17 @@ render() {
 		                      </Row>
 		                      <Row>
 		                          <Col span={24} style={{ textAlign: 'left' }}>
-		                            <Button type="primary" htmlType="submit" onClick={() => this.setModal1Visible(true)}>  Submit </Button>
-					                      <Button type="reset" style={{ marginLeft: 450 }}>  Cancelar </Button>
-		                            
+		                            <Button type="primary" htmlType="submit">  Submit </Button>
+					                <Button type="reset" style={{ marginLeft: 450 }}>  Cancelar </Button>
 		                          </Col>
-                             <Modal
-                                  title="Dados enviados com sucesso!"
-                                  style={{ top: 20, width:400 }}
-                                  visible={this.state.modal1Visible}
-                                  onOk={() => this.setModal1Visible(false)}
-                                  onCancel={() => this.setModal1Visible(false)}>
-                                 <p><Table dataSource={data1} columns={columns1} />,</p>  
-                             </Modal>
+		                             <Modal
+		                                  title="Dados enviados com sucesso!"
+		                                  style={{ top: 20, width:400 }}
+		                                  visible={this.state.modalUsuarioVisible}
+		                                  onOk={() => this.setModalUsuarioVisible(false)}
+		                                  onCancel={() => this.setModalUsuarioVisible(false)}>
+		                                 <p><Table dataSource={data1} columns={columns1} />,</p>  
+		                             </Modal>
 		                     </Row>
 		                 </Form>
 		              </TabPane>
