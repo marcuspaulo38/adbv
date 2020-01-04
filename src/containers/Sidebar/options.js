@@ -7,6 +7,11 @@ const options = [
 	leftIcon: 'ion-escalar',
   },
   {
+    key: 'Aprovacao',
+    label: 'Aprovações',
+    leftIcon: 'ion-escalar',
+  },
+  {
     key: 'CentroDeCusto',
     label: 'Centro de Custo',
     leftIcon: 'ion-escalar',

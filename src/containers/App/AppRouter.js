@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import asyncComponent from '../../helpers/AsyncFunc';
 
+
 const routes = [
   {
    path: '',
@@ -11,9 +12,14 @@ const routes = [
    path: 'HistoricoAtividades',
 	 component:asyncComponent(() =>import('../Page/LPHistoricoAtividades/index')),
   },
+  
   {
    path: 'GestaoDeApontamento',
-	 component:asyncComponent(() =>import('../Page/GestaoDeApontamento/index')),
+   component:asyncComponent(() =>import('../Page/GestaoDeApontamento/index')),
+  },
+  {
+   path: 'Aprovacao',
+   component:asyncComponent(() =>import('../Page/Aprovacao/index')),
   },
   {
     path: 'CentroDeCusto',
@@ -35,7 +41,6 @@ const routes = [
 	path: 'Plantonista',
 	component:asyncComponent(() =>import('../Page/Plantonista/index')),
   },
-  
   
 ];
 

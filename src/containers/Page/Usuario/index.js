@@ -63,9 +63,7 @@ class AdvancedSearchForm extends React.Component {
     
  }
  
-setModalUsuarioVisible(modalUsuarioVisible) {
-    this.setState({ modalUsuarioVisible });
-}
+
  
 handleOnChangeColaborador = (selectedValue) => {
     this.setState({
@@ -153,6 +151,10 @@ handleSubmit(event) {
     alert('CPF: '                      + this.state.cpf);*/
     event.preventDefault();
     this.setModalUsuarioVisible(true);
+}
+
+setModalUsuarioVisible(modalUsuarioVisible) {
+    this.setState({ modalUsuarioVisible });
 }
 
  getColumnSearchProps = dataIndex => ({
