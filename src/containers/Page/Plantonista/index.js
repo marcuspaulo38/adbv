@@ -43,16 +43,13 @@ class AdvancedSearchForm extends React.Component {
                     visible        : false,
                     visibleDat     : false,
                     
-                };
+                  };
     this.onChange1                = this.onChange1.bind(this);     
     this.handleChange             = this.handleChange.bind(this);
     this.handleSubmit             = this.handleSubmit.bind(this);
     this.modalPlantonistaVisible  = false;
     this.pagination               = {};
     this.loading                  = false;
-    
-   
-    
     
  }
 

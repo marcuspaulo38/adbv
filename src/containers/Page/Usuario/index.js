@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button, Tabs, Select, Modal, Table, Icon} from 'antd';
+import { Form, Input, Row, Col, Button, Tabs, Select, Modal, Table, Icon, Alert} from 'antd';
 import SearcherUsuario from './SearcherUsuario';
 import Highlighter from 'react-highlight-words';
 import userpic from '../../../image/editar.png';
@@ -46,7 +46,9 @@ class AdvancedSearchForm extends React.Component {
                   gestor                :'',
                   cargoprestacaoservico :'',
                   prefiltro             :'',
-                  cpf                   :''
+                  cpf                   :'',
+                  visible               :false,
+                  visibleUsuario       :false,
                 };
     this.handleOnChangeColaborador       = this.handleOnChangeColaborador.bind(this);
     this.handleOnChangeaApontamentoEscala= this.handleOnChangeaApontamentoEscala.bind(this);
@@ -63,7 +65,13 @@ class AdvancedSearchForm extends React.Component {
     
  }
  
+handleClose = () => {
+    this.setState({ visible: false });
+}
 
+handleCloseUsuario = () => {
+    this.setState({ visibleUsuario: false });
+}
  
 handleOnChangeColaborador = (selectedValue) => {
     this.setState({
@@ -94,7 +102,7 @@ handleOnChangeEcolaborador = (selectedValue) => {
 
 handleChange(event) {
   
-     if (event.target.name == "datainicioapontamento") {
+      if (event.target.name == "datainicioapontamento") {
             this.setState({
                 datainicioapontamento: event.target.value
             });
@@ -104,7 +112,6 @@ handleChange(event) {
                 dataterminoapontamento: event.target.value
             });
       }
-  
   
      if (event.target.name == "obs") {
             this.setState({
@@ -136,8 +143,8 @@ handleChange(event) {
 }
 
 handleSubmit(event) {
-    //alert('Os dados submetidos são:');
-    /*alert('Colaborador: '              + this.state.colaborador);
+    /*alert('Os dados submetidos são:');
+    alert('Colaborador: '              + this.state.colaborador);
     alert('Observação: '               + this.state.obs);
     alert('Data Inicio Apontamento: '  + this.state.datainicioapontamento);
     alert('Data Termino Apontamento: ' + this.state.dataterminoapontamento);
@@ -149,8 +156,20 @@ handleSubmit(event) {
     alert('Cargo Prestacão Serviço: '  + this.state.cargoprestacaoservico);
     alert('Pré - Fltro: '              + this.state.prefiltro);
     alert('CPF: '                      + this.state.cpf);*/
-    event.preventDefault();
-    this.setModalUsuarioVisible(true);
+    
+    if (this.state.colaborador == 'undefined' || this.state.colaborador == '')
+    {
+       this.setState({ visibleUsuario: true });
+       this.setModalUsuarioVisible(false);
+       event.preventDefault(false);
+       return false;
+    }  
+    
+    else{
+      event.preventDefault();
+       this.setModalUsuarioVisible(true);
+    }
+ 
 }
 
 setModalUsuarioVisible(modalUsuarioVisible) {
@@ -351,6 +370,17 @@ render() {
                                           <Option value="Colaborador02">Colaborador 02</Option>
                                           <Option value="Colaborador03">Colaborador 03</Option>
                                         </Select>,
+                                         <div>
+                                    {this.state.visibleUsuario ? (
+                                      <Alert
+                                        message="Atenção: Informe um Colaborador."
+                                        type="error"
+                                        closable
+                                        afterClose={this.handleCloseUsuario}
+                                      /> ) : null}
+                                  </div>
+                                        
+                                         
                              </div>
 		                        <Col span={12}>
 		                          <div>

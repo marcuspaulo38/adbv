@@ -79,9 +79,6 @@ class AdvancedSearchForm extends React.Component {
     this.pagination                = {};
     this.loading                   = false;
     
- 
-    
-    
  }
 
  
@@ -142,28 +139,28 @@ handleSubmit(event) {
       alert('responsavelpelofechamento:'+ this.state.responsavelpelofechamento );*/
     
     
-    if (this.state.competencia == '')
+    if (this.state.competencia == 'undefined' || this.state.competencia == '')
     {
        this.setState({ visibleCompetencia: true });
        this.setModalCompetenciaVisible(false);
        event.preventDefault(false);
        return false;
     }  
-    if (this.state.integracao== '')
+    if (this.state.integracao == 'undefined' || this.state.integracao == '')
     {
        this.setState({ visibleIntegracao: true });
        this.setModalIntegracaoVisible(false);
        event.preventDefault(false);
        return false;
     }
-    if (this.state.horasnormais== '')
+    if (this.state.horasnormais == 'undefined' || this.state.horasnormais == '')
     {
        this.setState({ visibleHorasNormais: true });
        this.setModalHorasNormaisVisible(false);
        event.preventDefault(false);
        return false;
     }
-    if (this.state.horasextras== '')
+    if (this.state.horasextras == 'undefined' || this.state.horasextras == '')
     {
        this.setState({ visibleHorasExtras: true });
        this.setModalHorasExtrasVisible(false);
