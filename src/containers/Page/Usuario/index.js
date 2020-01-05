@@ -9,13 +9,24 @@ import './tab.css';
 import { cpfMask } from './Mask';
 import { AutoComplete } from 'antd';
 
+
+const { Option } = Select;
+const { TabPane } = Tabs;
+const { TextArea } = Input;
+
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;
 }
-const { Option } = Select;
+
 function onChange(value) {
   console.log(`selected ${value}`);
 }
+
+function onSelect(value) {
+  console.log('onSelect', value);
+  const dado1 = value;
+ // alert(dado1);
+ }
 
 function onBlur() {
   console.log('blur');
@@ -29,8 +40,6 @@ function onSearch(val) {
   console.log('search:', val);
 }
 
-const { TabPane } = Tabs;
-const { TextArea } = Input;
 
 class AdvancedSearchForm extends React.Component {
   constructor(props) {
@@ -49,8 +58,11 @@ class AdvancedSearchForm extends React.Component {
                   cpf                   :'',
                   visible               :false,
                   visibleUsuario       :false,
+                  value: '',
+                  dataSource: ['Marcus', 'Outro'],
+                  onSelect:[],
+                  
                 };
-    this.handleOnChangeColaborador       = this.handleOnChangeColaborador.bind(this);
     this.handleOnChangeaApontamentoEscala= this.handleOnChangeaApontamentoEscala.bind(this);
     this.handleOnChangeRestricao         = this.handleOnChangeRestricao.bind(this);
     this.handleOnChangeTipoRestricao     = this.handleOnChangeTipoRestricao.bind(this);
@@ -60,10 +72,24 @@ class AdvancedSearchForm extends React.Component {
     this.modalUsuarioVisible             = false;
     this.pagination                      = {};
     this.loading                         = false;
+    this.onChange                        = this.onChange.bind(this);
     
- 
+    
     
  }
+ 
+
+onSearch = searchText => {
+    this.setState({
+      dataSource: !searchText ? [] : [searchText, searchText.repeat(2), searchText.repeat(3)],
+    });
+  };
+
+onChange = value => {
+    this.setState({colaborador: value});
+    //alert('ddd'+this.state.coborador);
+   
+}; 
  
 handleClose = () => {
     this.setState({ visible: false });
@@ -73,12 +99,7 @@ handleCloseUsuario = () => {
     this.setState({ visibleUsuario: false });
 }
  
-handleOnChangeColaborador = (selectedValue) => {
-    this.setState({
-                    colaborador: selectedValue
-                 });
-   
-}
+
 handleOnChangeaApontamentoEscala = (selectedValue) => {
     this.setState({
                     apontamentoescala: selectedValue
@@ -98,10 +119,14 @@ handleOnChangeEcolaborador = (selectedValue) => {
     this.setState({
                     ecolaborador: selectedValue
                 });
-}  
+}
+
+handleSend = () => {
+   // alert(`Seu nome é ${this.state.colaborador}`);
+};
 
 handleChange(event) {
-  
+      
       if (event.target.name == "datainicioapontamento") {
             this.setState({
                 datainicioapontamento: event.target.value
@@ -156,6 +181,7 @@ handleSubmit(event) {
     alert('Cargo Prestacão Serviço: '  + this.state.cargoprestacaoservico);
     alert('Pré - Fltro: '              + this.state.prefiltro);
     alert('CPF: '                      + this.state.cpf);*/
+   
     
     if (this.state.colaborador == 'undefined' || this.state.colaborador == '')
     {
@@ -175,6 +201,7 @@ handleSubmit(event) {
 setModalUsuarioVisible(modalUsuarioVisible) {
     this.setState({ modalUsuarioVisible });
 }
+
 
  getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -349,38 +376,28 @@ render() {
                      <Form className="ant-advanced-search-form" onSubmit={this.handleSubmit}>
 		                      <Row>
 		                       <Col span={13}>
-		                         <div style={{ marginBottom: 25 , width:600}}>
-				                               Colaborador<br />
-                                       
-                                       <Select
-                                          showSearch
-                                          style={{ width: 600 }}
-                                          placeholder="Selecione o colaborador"
-                                          optionFilterProp="children"
-                                          onChange={onChange}
-                                          onFocus={onFocus}
-                                          onBlur={onBlur}
-                                          onSearch={onSearch}
-                                          onSelect={(value, event) => this.handleOnChangeColaborador(value, event)}
-                                          filterOption={(input, option) =>
-                                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                          } required="required"
-                                        >
-                                          <Option value="Colaborador01">Colaborador 01</Option>
-                                          <Option value="Colaborador02">Colaborador 02</Option>
-                                          <Option value="Colaborador03">Colaborador 03</Option>
-                                        </Select>,
-                                         <div>
-                                    {this.state.visibleUsuario ? (
-                                      <Alert
-                                        message="Atenção: Informe um Colaborador."
-                                        type="error"
-                                        closable
-                                        afterClose={this.handleCloseUsuario}
-                                      /> ) : null}
-                                  </div>
+		                             <div style={{ marginBottom: 25 , width:600}}>
+				                            Colaborador<br />
+                                     <AutoComplete
+                                        value={this.state.colaborador}
+                                        dataSource={dataSource}
+                                        style={{ width: 600 }}
+                                        onSelect={onSelect}
+                                        onSearch={this.onSearch}
+                                        onChange={this.onChange}
+                                        placeholder="Digite para buscar um colaborador"
+                                        id="colaborador" name="colaborador"
+                                      />    
+                                    <div>
+                                         {this.state.visibleUsuario ? (
+                                           <Alert
+                                             message="Atenção: Informe um Colaborador."
+                                             type="error"
+                                             closable
+                                             afterClose={this.handleCloseUsuario}
+                                           /> ) : null}
+                                       </div>
                                         
-                                         
                              </div>
 		                        <Col span={12}>
 		                          <div>
