@@ -6,8 +6,6 @@ import SearchePlantonista from "./SearchePlantonista";
 import Highlighter from 'react-highlight-words';
 import userpic from '../../../image/editar.png';
 import moment from 'moment';
-import Moment from 'react-moment';
-import 'moment-timezone';
 import './tab.css';
 
 const { RangePicker } = DatePicker;
@@ -18,7 +16,6 @@ const plainOptions    = ['Fortaleza', 'Recife', 'Salvador', 'Aracaju'];
 const { TabPane }     = Tabs;
 const { TextArea }    = Input;
 const { MonthPicker } = DatePicker;
-
 
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;

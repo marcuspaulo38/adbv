@@ -7,8 +7,7 @@ import Highlighter from 'react-highlight-words';
 import calendario from '../../../image/calendario.png';
 
 import moment from 'moment';
-import Moment from 'react-moment';
-import 'moment-timezone';
+
 import './tab.css';
 
 const { RangePicker }                 = DatePicker;
