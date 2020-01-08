@@ -80,7 +80,7 @@ class Sidebar extends Component {
           key={key}
           title={
             <span className="isoMenuHolder" style={submenuColor}>
-              <i className={leftIcon} />
+             { /*<i className={leftIcon} />*/}
               <span className="nav-text">
                 <IntlMessages id={label} />
               </span>

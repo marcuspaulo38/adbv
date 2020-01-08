@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button,Table, Tabs, DatePicker, Checkbox,Icon, Modal,  Alert  } from 'antd';
+import { Form, Input, Row, Col, Button,Table, Tabs, DatePicker, Checkbox,Icon, Modal,  Alert, Select  } from 'antd';
 import SearchePlantonista from "./SearchePlantonista";
 import Highlighter from 'react-highlight-words';
 import userpic from '../../../image/editar.png';
 import moment from 'moment';
 import './tab.css';
+
+
 
 const { RangePicker } = DatePicker;
 const dateFormat      = 'DD/MM/YYYY';
@@ -16,6 +18,19 @@ const plainOptions    = ['Fortaleza', 'Recife', 'Salvador', 'Aracaju'];
 const { TabPane }     = Tabs;
 const { TextArea }    = Input;
 const { MonthPicker } = DatePicker;
+const { Option } = Select;
+const children = [];
+
+
+
+for (let i = 10; i < 36; i++) {
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+}
+const children1 = [];
+for (let i = 10; i < 36; i++) {
+  children1.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+}
+
 
 function Img() {
 	  return  <img alt="user" src={userpic} height="25" width="25"/>;
@@ -30,25 +45,61 @@ class AdvancedSearchForm extends React.Component {
    constructor(props) {
     super(props);
 	   this.state = {
-	                  expand: false,
-	                  search         : "",
-	                  searchText     : '',
-	                  searchedColumn : '',
-                    dataplantonista: '',
-                    plantonista    :'',
-                    observacao     :'',
-                    visible        : false,
-                    visibleDat     : false,
+	                  expand             : false,
+	                  search             : "",
+	                  searchText         : '',
+	                  searchedColumn     : '',
+                    dataplantonista    : '',
+                    observacao         :'',
+                    visible            : false,
+                    visibleData        : false,
+                    visibleNome        : false,
+                    nomeplantonista    :'',
+                    cidade             :'',
+                    dataplantonista1   :  '',
+                    dataplantonista2   :'',
                     
                   };
-    this.onChange1                = this.onChange1.bind(this);     
-    this.handleChange             = this.handleChange.bind(this);
-    this.handleSubmit             = this.handleSubmit.bind(this);
-    this.modalPlantonistaVisible  = false;
-    this.pagination               = {};
-    this.loading                  = false;
+    this.handleChange                = this.handleChange.bind(this);
+    this.handleChangeNomePlantonista = this.handleChangeNomePlantonista.bind(this);
+    this.handleChangeCidade          = this.handleChangeCidade.bind(this);
+    this.handleSubmit                = this.handleSubmit.bind(this);
+    this.modalPlantonistaVisible     = false;
+    this.modalNomeVisible            = false;
+    this.pagination                  = {};
+    this.loading                     = false;
     
  }
+ 
+ handleChangeNomePlantonista = value=> {
+  //console.log(`selected ${value}`);
+  
+   if (value == "nomeplantonista") {
+            this.setState({
+                nomeplantonista: value
+            });
+      }
+      else{
+          this.setState({ nomeplantonista: value });
+          
+      }
+  
+}
+
+ handleChangeCidade = value=> {
+  //console.log(`selected ${value}`);
+  
+   if (value == "cidade") {
+            this.setState({
+                cidade: value
+            });
+      }
+      else{
+          this.setState({ cidade: value });
+          
+      }
+  
+}
 
 handleClose = () => {
     this.setState({ visible: false });
@@ -57,17 +108,19 @@ handleClose = () => {
 handleCloseData = () => {
     this.setState({ visibleData: false });
 };
+handleCloseNome = () => {
+    this.setState({ visibleNome: false });
+};
+
 
 onChange = dataplantonista => this.setState({ dataplantonista})
 
 
-onChange1(checkedValues) {
-  this.setState({ plantonista: checkedValues})
-  
-}
-
 setModalPlantonistaVisible(modalPlantonistaVisible) {
     this.setState({ modalPlantonistaVisible });
+}
+setModalNomeVisible(modalNomeVisible) {
+    this.setState({ modalNomeVisible });
 }
 
 handleChange(event) {
@@ -78,12 +131,7 @@ handleChange(event) {
               
             });
       }
-      
-      if (event.target.name == "plantonista") {
-            this.setState({
-                plantonista: event.target.value
-            });
-      }
+     
   
      if (event.target.name == "observacao") {
             this.setState({
@@ -94,19 +142,52 @@ handleChange(event) {
 }
 
 handleSubmit(event) {
-      //alert('Os dados submetidos são:');
-      //alert('Data Plantonista : '       + this.state.dataplantonista);
-      //alert('Platonista : '              + this.state.plantonista);
-      //alert('Observação: '               + this.state.observacao );
+    //alert('Os dados submetidos são:');
+    //alert('Data Plantonista : '  + this.state.dataplantonista);
+    //alert('Platonista : '        + this.state.plantonista);
+    //alert('Observação: '         + this.state.observacao );
+    // alert('nomeplantonista: '    + this.state.nomeplantonista );    
+    //alert('Data Plantonista : '  + Date.parse(this.state.dataplantonista.toString()));
     
-    if (this.state.dataplantonista == '')
+        let a    = "";
+        let b    = this.state.dataplantonista;
+        let c    = a.concat(b); 
+        const str= c;
+        let res  = str.split(",");
+        let data = new Date(res[0]);
+        let dia  = data.getDate().toString();
+        let diaF = (dia.length == 1) ? '0'+dia : dia;
+        let mes  = (data.getMonth()+1).toString(); //+1 pois no getMonth Janeiro começa com zero.
+        let mesF = (mes.length == 1) ? '0'+mes : mes;
+        let anoF = data.getFullYear();
+        this.setState({dataplantonista1: +diaF+"/"+mesF+"/"+anoF});
+      
+        let data1 = new Date(res[1]);
+        let dia1  = data1.getDate().toString();
+        let diaF1 = (dia1.length == 1) ? '0'+dia1 : dia1;
+        let mes1  = (data1.getMonth()+1).toString(); 
+        let mesF1 = (mes1.length == 1) ? '0'+mes1 : mes1;
+        let anoF1 = data1.getFullYear();
+        this.setState({dataplantonista2: +diaF1+"/"+mesF1+"/"+anoF1});
+       
+      
+    
+     if (this.state.nomeplantonista == '' || this.state.nomeplantonista == false ||  this.state.nomeplantonista == undefined) 
+     {
+       this.setState({ visibleNome: true });
+       this.setModalNomeVisible(false);
+       event.preventDefault(false);
+       return false;
+    } 
+    
+    if (this.state.dataplantonista == '' || this.state.dataplantonista == false || this.state.dataplantonista == undefined) 
     {
        this.setState({ visibleData: true });
        this.setModalPlantonistaVisible(false);
        event.preventDefault(false);
        return false;
     }  
-    if (this.state.plantonista== false)
+    if (this.state.cidade== false || this.state.cidade == '' || this.state.cidade == undefined)
     {
        this.setState({ visible: true });
        this.setModalPlantonistaVisible(false);
@@ -193,19 +274,29 @@ render() {
   
   const columns = [
   {
+    title: 'Plantonista(s)',
+    dataIndex: 'nomeplantonista',
+    render: text => <a>{text}</a>,
+    onFilter: (value, record) => record.nomeplantonista.indexOf(value) === 0,
+    sorter: (a, b) => a.nomeplantonista.length - b.nomeplantonista.length,
+    sortDirections: ['descend', 'ascend'],
+     ...this.getColumnSearchProps('nomeplantonista'),
+  },
+  {
     title: 'Data',
     dataIndex: 'dataplantonista',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.dataplantonista - b.dataplantonista,
   },
+  
   {
-    title: 'Plantonistas',
-    dataIndex: 'plantonista',
+    title: 'Cidade(s)',
+    dataIndex: 'cidade',
     render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.plantonista.indexOf(value) === 0,
-    sorter: (a, b) => a.plantonista.length - b.plantonista.length,
+    onFilter: (value, record) => record.cidade.indexOf(value) === 0,
+    sorter: (a, b) => a.cidade.length - b.cidade.length,
     sortDirections: ['descend', 'ascend'],
-     ...this.getColumnSearchProps('plantonista'),
+     ...this.getColumnSearchProps('cidade'),
   },
   
   {
@@ -248,8 +339,9 @@ render() {
   const data = [
   {
      key                                 :'1',
-     dataplantonista                     :'this.state.dataplantonista',
-     plantonista                         :this.state.plantonista,
+     nomeplantonista                     : this.state.nomeplantonista,
+     dataplantonista                     :this.state.dataplantonista1+'-'+this.state.dataplantonista2,
+     cidade                              :this.state.cidade,
      observacao                          :this.state.observacao,
      integradocomrubi                    :'...',
      criadopor                           :'Antonio Luiz',
@@ -261,38 +353,39 @@ render() {
   
  const columns1 = [
   {
+    title: 'Plantonista(s)',
+    dataIndex: 'nomeplantonista',
+    render: text => <a>{text}</a>,
+    onFilter: (value, record) => record.nomeplantonista.indexOf(value) === 0,
+    sorter: (a, b) => a.nomeplantonista.length - b.nomeplantonista.length,
+    sortDirections: ['descend', 'ascend'],
+     ...this.getColumnSearchProps('nomeplantonista'),
+  },
+  {
     title: 'Data',
     dataIndex: 'dataplantonista',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.dataplantonista - b.dataplantonista,
   },
   {
-    title: 'Plantonistas',
-    dataIndex: 'plantonista',
+    title: 'Cidade(s)',
+    dataIndex: 'cidade',
     render: text => <a>{text}</a>,
-    onFilter: (value, record) => record.plantonista.indexOf(value) === 0,
-    sorter: (a, b) => a.plantonista.length - b.plantonista.length,
+    onFilter: (value, record) => record.cidade.indexOf(value) === 0,
+    sorter: (a, b) => a.cidade.length - b.cidade.length,
     sortDirections: ['descend', 'ascend'],
      ...this.getColumnSearchProps('plantonista'),
   },
-  
-  {
-    title: 'Observações',
-    dataIndex: 'observacao',
-    onFilter: (value, record) => record.observacao.indexOf(value) === 0,
-    sorter: (a, b) => a.observacao.length - b.observacao.length,
-    sortDirections: ['descend', 'ascend'],
-     ...this.getColumnSearchProps('observacao'),
-  },
+ 
   
 ];
                                 
   const data1 = [
   {
      key                                 :'1',
-     dataplantonista                     :'this.state.dataplantonista',
-     plantonista                          :this.state.plantonista,
-     observacao                          :this.state.observacao,
+     nomeplantonista                     : this.state.nomeplantonista,
+     dataplantonista                     :this.state.dataplantonista1+'-'+this.state.dataplantonista2,
+     cidade                              :this.state.cidade,
   },
  
 ]; 
@@ -303,6 +396,28 @@ render() {
 		              <TabPane tab="Novo Cadastro" key="1" textStyle={{color: '#fff'}} >
 		                 <Form className="ant-advanced-search-form" onSubmit={this.handleSubmit}>
 		                     <Row>
+                         <table>
+                              <tr>
+                                <td>
+                                  <Form.Item label={`Plantonista(s)`} style={{ marginBottom: 16 , width:400}}>
+                                     <Select mode="tags" id="nomeplantonista" name="nomeplantonista" onChange={this.handleChangeNomePlantonista} value={this.state.nomeplantonista}  tokenSeparators={[',']} required="required">
+                                  {children}
+                                 </Select>,
+                                  </Form.Item>
+                                  <div>
+                                    {this.state.visibleNome ? (
+                                      <Alert
+                                        message="Atenção: Informe um ou mais Plantonista(s)."
+                                        type="error"
+                                        closable
+                                        afterClose={this.handleCloseNome}
+                                      /> ) : null}
+                                  </div>
+                                
+                                </td>
+                             
+                              </tr>
+                            </table>
 		                         <table>
 		                           <tr>
                                <td>
@@ -322,7 +437,7 @@ render() {
                                   <div>
                                     {this.state.visibleData ? (
                                       <Alert
-                                        message="Atenção: informe uma data"
+                                        message="Atenção: Informe uma competência."
                                         type="error"
                                         closable
                                         afterClose={this.handleCloseData}
@@ -335,13 +450,15 @@ render() {
 		                         <table>
 		                           <tr>
 		                             <td>
-			                          <Form.Item label={`Plantonista`}  style={{ marginBottom: 16 , width:400}}>
-				                          <Checkbox.Group options={plainOptions} defaultValue={['Dados']} value={this.state.plantonista} onChange={this.onChange1} required="required"/>
+			                          <Form.Item label={`Cidade(s)`}  style={{ marginBottom: 16 , width:400}}>
+				                          <Select mode="tags" id="cidade" name="cidade" onChange={this.handleChangeCidade} value={this.state.cidade}  tokenSeparators={[',']} required="required">
+                                  {children1}
+                                 </Select>,
 				                        </Form.Item>
                                 <div>
                                 {this.state.visible ? (
                                   <Alert
-                                    message="Atenção: marque ao menos um PLANTONISTA"
+                                    message="Atenção: Informe pelo menos uma Cidade."
                                     type="error"
                                     closable
                                     afterClose={this.handleClose}
@@ -350,6 +467,7 @@ render() {
 			                         </td>
 		                           </tr>
 		                         </table>
+                            
 		                       <table>
 			                     <tr>
 			                       <td>

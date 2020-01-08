@@ -9,7 +9,8 @@ export default props => {
         <div>
           <h3>
             <Link to="#" onClick={() => props.onClick('#')}>
-              <i class="fa fa-cloud"></i>
+              {/*<i class="fa fa-cloud"></i>*/}
+              <img title='Página Inicial' src='./images/icon_lanllink.png'  width='50px' height='50px'/>
             </Link>
           </h3>
         </div>

@@ -116,7 +116,7 @@ const data = [
 const columns = [
   
   {
-    title: 'Titulo',
+    title: 'Centro de Custo',
     dataIndex: 'titulo',
     render: text => <a>{text}</a>,
     onFilter: (value, record) => record.titulo.indexOf(value) === 0,

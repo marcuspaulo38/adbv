@@ -89,7 +89,7 @@ class TabView extends Component {
             <div className="isoMiddleWrapper">
               <div className="isoBucketLabel">
                 <button className="isoBackCatBtn" onClick={this.openDrawer}>
-                  <i className="ion-android-menu" />
+                  <i className="ion-android-menu" />gfgfgfg
                 </button>
                 <h3>{filterAttr.bucket}</h3>
                 <PaginationControl />

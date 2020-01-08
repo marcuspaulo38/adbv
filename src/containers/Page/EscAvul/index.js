@@ -101,6 +101,7 @@ handleChange(event) {
               
             });
       }
+     
       if (event.target.name == "quantidadehoras") {
             this.setState({
                 quantidadehoras: event.target.value
@@ -119,7 +120,7 @@ handleChange(event) {
               
             });
       }
-     
+      
      
 }
 
@@ -134,8 +135,21 @@ handleSubmit(event) {
       alert('terminoalmoco: '   + this.state.terminoalmoco );
       alert('descanso:'         + this.state.descanso );*/
      this.setState({quantidadehoras: parseFloat(this.state.horainicio) - parseFloat(this.state.horatermino)});
-     this.setState({descanso:       parseFloat(this.state.inicioalmoco) - parseFloat(this.state.terminoalmoco)});
-   
+     this.setState({descanso       : parseFloat(this.state.inicioalmoco) - parseFloat(this.state.terminoalmoco)});
+     this.state.quantidadehoras = Math.abs(this.state.quantidadehoras);
+     this.state.descanso        = Math.abs(this.state.descanso);
+     
+     
+    if(this.state.quantidadehoras <= 9)
+    {
+         this.state.quantidadehoras = "0"+this.state.quantidadehoras;
+         //alert('quantidadehoras: ' + this.state.quantidadehoras );
+    }
+    if(this.state.descanso <= 9)
+    {
+          this.state.descanso        = "0"+this.state.descanso;
+        //alert('descanso:'         + this.state.descanso );
+    }
       
     if (this.state.nome == '')
     {
@@ -265,8 +279,7 @@ render() {
     dataIndex: 'totaldescanso',
   },
 ];
-  
-  
+    
   const data = [
   {
     key            : '1',
@@ -275,8 +288,8 @@ render() {
     horainicio     : this.state.horainicio,
     inicioalmoco   : this.state.inicioalmoco,
     horatermino    : this.state.horatermino,
-    quantidadehoras: this.state.quantidadehoras,
-    totaldescanso  : this.state.descanso,
+    quantidadehoras: Math.abs(this.state.quantidadehoras),
+    totaldescanso  : Math.abs(this.state.descanso), 
     editar         : "Editar | Excluir"
   },
  
@@ -323,7 +336,7 @@ render() {
     nome           : this.state.nome,
     horainicio     : this.state.horainicio,
     horatermino    : this.state.horatermino,
-    totaldescanso  : this.state.descanso,
+    totaldescanso  : Math.abs(this.state.descanso), 
   },
   
  
@@ -392,23 +405,21 @@ return (
 				                                     <br />
 				                                     <Input type="time" step='1' min="01:00:00" max="24:00:00" name="horainicio" id="horainicio" value={this.state.horainicio}  onChange={this.handleChange} required="required"/>
                                              </div>
-                                             
-				                                 </td>
+                                         </td>
 				                                  <td>
 				                                  <div style={{ marginBottom: 16 , width:200}}>
 				                                     Horário de término 
 				                                     <br />
-				                                     <Input type="time" step='1' min="01:00:00" max="24:00:00" name="horatermino" id="horatermino"   placeholder="00:00:00"  value={this.state.horatermino}  onChange={this.handleChange} required="required"/>
+				                                     <Input type="time" step='1' min="01:00:00" max="24:00:00" name="horatermino" id="horatermino"   placeholder="00:00:00"  value={this.state.horatermino}  onChange={this.handleChange}  required="required"/>
 				                                   </div>
 				                                 </td>
 				                                  <td>
 				                                  <div style={{ marginBottom: 16 , width:200}}>
 				                                     Quantidade de horas
 				                                     <br />
-				                                     <Input type="text" name="quantidadehoras" id="quantidadehoras"  placeholder="00:00:00"  value={this.state.quantidadehoras}   disabled="disabled"/>
+                                             <Input type="text" name="quantidadehoras" id="quantidadehoras"  placeholder="00:00:00"  value={Math.abs(this.state.quantidadehoras)}   disabled="disabled"/>
 				                                   </div>
-                                           
-				                                 </td>
+                                         </td>
 				                                </tr>
 				                           </table>
 				                           <table>
@@ -432,7 +443,7 @@ return (
 				                                  <div style={{ marginBottom: 16 , width:200}}>
 				                                     Total Descanso
                                              <br />
-                                             <Input type="text" name="descanso" id="descanso" value={this.state.descanso} placeholder="00:00:00" disabled="disabled"/>
+                                             <Input type="text" name="descanso" id="descanso" value={Math.abs(this.state.descanso)} placeholder="00:00:00" disabled="disabled"/>
 				                                   </div>
 				                                 </td>
 				                                </tr>
@@ -458,7 +469,7 @@ return (
 		                                  onOk={() => this.setModalEscalaAvulsaVisible(false)}
 		                                  onCancel={() => this.setModalEscalaAvulsaVisible(false)}>
 		                                 <p><Table dataSource={data1} columns={columns1} />,</p>  
-		                         </Modal>
+		                                </Modal>
 				                     </Row>
 		                 </Form>
 		              </TabPane>

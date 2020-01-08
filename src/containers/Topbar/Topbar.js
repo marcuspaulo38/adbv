@@ -40,7 +40,7 @@ class Topbar extends Component {
               style={{ color: customizedTheme.textColor }}
               onClick={toggleCollapsed}
             />
-          </div>
+            </div>
 
           <ul className="isoRight">
             <li

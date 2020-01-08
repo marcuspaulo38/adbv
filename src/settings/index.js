@@ -3,7 +3,7 @@ export default {
 };
 
 const siteConfig = {
-  footerText: 'Lanlink Informática ©2019',
+  footerText: 'Lanlink Informática ©2020',
 };
 const themeConfig = {
   topbar: 'themedefault',

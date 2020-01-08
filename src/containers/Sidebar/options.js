@@ -3,7 +3,7 @@ const options = [
   
   {
 	key: 'GestaoDeApontamentoLabel',
-	label: 'Gestão de apontamentos',
+	label: 'Gestão de Apontamentos',
   leftIcon: 'ion-escalar',
   children:[
     {
