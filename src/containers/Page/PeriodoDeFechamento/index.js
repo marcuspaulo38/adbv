@@ -5,6 +5,11 @@ import { Form, Input, Row, Col, Button, Tabs, Table, Select, Icon, Modal,  Alert
 //import SearchePlantonista from "./SearchePlantonista";
 import Highlighter from 'react-highlight-words';
 
+import { compareAsc, format, zonedTimeToUtc, utcToZonedTime,addYears,formatWithOptions,toDate } from 'date-fns';
+import {eo} from 'date-fns/locale/eo';
+
+
+
 import calendario from '../../../image/calendario.png';
 import responsavel from '../../../image/usuario.png';
 import livro from '../../../image/livro.png';
@@ -138,7 +143,38 @@ handleSubmit(event) {
       alert('horasextras: '             + this.state.horasextras );
       alert('responsavelpelofechamento:'+ this.state.responsavelpelofechamento );*/
     
+    let data = new Date(this.state.datainicio);
+    let dia  = data.getDate().toString();
+    let diaF = (dia.length == 1) ? '0'+dia : dia;
+    let mes  = (data.getMonth()+1).toString(); //+1 pois no getMonth Janeiro começa com zero.
+    let mesF = (mes.length == 1) ? '0'+mes : mes;
+    let anoF = data.getFullYear();
     
+     if(anoF <= 2019 )
+     {
+       this.setState({ visibleCompetencia: true });
+       this.setModalCompetenciaVisible(false);
+       event.preventDefault(false);
+       return false;
+     }
+        
+    if(mes =='02'){
+          this.setState({ competencia: "02/"+anoF });
+          
+    }else{
+      
+       if(diaF <=20 && mes != '02'){
+        let mes2 = (data.getMonth()-1).toString();
+        this.setState({ competencia: +mes+"/"+anoF });
+          
+      }
+      if(diaF >=21 && mes != '02'){
+          let mes1  = (data.getMonth()+2).toString();
+          this.setState({ competencia: +mes1+"/"+anoF });
+      }
+    }
+
+   
     if (this.state.competencia == 'undefined' || this.state.competencia == '')
     {
        this.setState({ visibleCompetencia: true });
@@ -413,18 +449,16 @@ return (
                                           onSelect={(value, event) => this.handleOnChangeCompetencia(value, event)}
                                           filterOption={(input, option) =>
                                             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                          } required="required"
+                                          } disabled="disabled"
                                         >
-                                          <Option value="04/12">04/12</Option>
-                                          <Option value="05/12">05/12</Option>
-                                          <Option value="06/12">06/12</Option>
+                                          <Option value="04/12">Competência Automática</Option>
                                         </Select>
 				                              
 			                       </div>
                              <div>
                                     {this.state.visibleCompetencia ? (
                                       <Alert
-                                        message="Atenção: Informe a Competência."
+                                        message="Atenção: Competências de 2019 são inválida! Favor informe uma competência apartir de 01/2020."
                                         type="error"
                                         closable
                                         afterClose={this.handleCloseCompetencia}

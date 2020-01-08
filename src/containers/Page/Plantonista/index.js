@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
-import { Form, Input, Row, Col, Button,Table, Tabs, DatePicker, Checkbox,Icon, Modal,  Alert, Select  } from 'antd';
+import { Form, Input, Row, Col, Button,Table, Tabs, DatePicker, Checkbox,Icon, Modal,  Alert, Select,InputNumber, Popconfirm,  } from 'antd';
 import SearchePlantonista from "./SearchePlantonista";
 import Highlighter from 'react-highlight-words';
 import userpic from '../../../image/editar.png';
@@ -14,7 +14,6 @@ const { RangePicker } = DatePicker;
 const dateFormat      = 'DD/MM/YYYY';
 const monthFormat     = 'YYYY/MM';
 const dateFormatList  = ['DD/MM/YYYY', 'DD/MM/YY'];
-const plainOptions    = ['Fortaleza', 'Recife', 'Salvador', 'Aracaju'];
 const { TabPane }     = Tabs;
 const { TextArea }    = Input;
 const { MonthPicker } = DatePicker;
