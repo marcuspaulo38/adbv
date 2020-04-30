@@ -16,7 +16,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "immer": "^4.0.1",
     "ionicons": "^4.6.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
